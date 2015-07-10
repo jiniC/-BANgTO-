@@ -29,7 +29,7 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.login);
 
 		mPlusClient = new GoogleApiClient.Builder(this).addApi(Plus.API).addScope(Plus.SCOPE_PLUS_LOGIN)
 				.addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
