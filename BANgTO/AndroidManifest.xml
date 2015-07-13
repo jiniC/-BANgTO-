@@ -33,6 +33,7 @@
             </intent-filter>
         </activity>
         <activity android:name="GroupMenuActivity"></activity>
+        <activity android:name="PersonalInfoActivity"></activity>
     </application>
 
 </manifest>

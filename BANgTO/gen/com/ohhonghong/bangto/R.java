@@ -485,11 +485,14 @@ containing a value of this type.
         public static final int ic_plusone_tall_off_client=0x7f020028;
         public static final int loading_shape=0x7f020029;
         public static final int login_shape=0x7f02002a;
-        public static final int powered_by_google_dark=0x7f02002b;
-        public static final int powered_by_google_light=0x7f02002c;
+        public static final int next=0x7f02002b;
+        public static final int powered_by_google_dark=0x7f02002c;
+        public static final int powered_by_google_light=0x7f02002d;
+        public static final int t_bank=0x7f02002e;
+        public static final int t_num=0x7f02002f;
     }
     public static final class id {
-        public static final int action_settings=0x7f070022;
+        public static final int action_settings=0x7f070026;
         public static final int adjust_height=0x7f070001;
         public static final int adjust_width=0x7f070002;
         public static final int book_now=0x7f070012;
@@ -500,14 +503,17 @@ containing a value of this type.
         public static final int classic=0x7f070016;
         public static final int dismissable_container=0x7f07001a;
         public static final int donate_with_google=0x7f070015;
+        public static final int editText1=0x7f070024;
         public static final int etGroupName=0x7f07001e;
         public static final int grayscale=0x7f070017;
         public static final int groupAddButton=0x7f07001c;
         public static final int holo_dark=0x7f070008;
         public static final int holo_light=0x7f070009;
         public static final int hybrid=0x7f070004;
+        public static final int ibNext=0x7f070025;
         public static final int imageView1=0x7f07001d;
         public static final int imageView2=0x7f07001f;
+        public static final int imageView3=0x7f070023;
         public static final int listview=0x7f07001b;
         public static final int match_parent=0x7f070010;
         public static final int monochrome=0x7f070018;
@@ -519,6 +525,7 @@ containing a value of this type.
         public static final int selectionDetails=0x7f07000f;
         public static final int sign_in_button=0x7f070021;
         public static final int slide=0x7f070019;
+        public static final int spinner1=0x7f070022;
         public static final int strict_sandbox=0x7f07000c;
         public static final int terrain=0x7f070007;
         public static final int test=0x7f07000d;
@@ -535,6 +542,7 @@ containing a value of this type.
         public static final int groupmenu_item=0x7f030003;
         public static final int loading=0x7f030004;
         public static final int login=0x7f030005;
+        public static final int personal_info=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;

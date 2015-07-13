@@ -13,7 +13,6 @@ import android.content.IntentSender.SendIntentException;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 
 public class MainActivity extends Activity implements OnClickListener, ConnectionCallbacks, OnConnectionFailedListener {
 
@@ -88,6 +87,8 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
 		// String accountName = mPlusClient.getAccountName();
 		// Toast.makeText(this, accountName + " is connected.",
 		// Toast.LENGTH_LONG).show();
+		Intent intent = new Intent(this, PersonalInfoActivity.class);
+		startActivity(intent);
 	}
 
 	@Override
