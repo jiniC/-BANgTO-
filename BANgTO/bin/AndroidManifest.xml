@@ -33,7 +33,9 @@
             </intent-filter>
         </activity>
         <activity android:name="GroupMenuActivity"></activity>
+        <activity android:name="BankActivity"></activity>
         <activity android:name="PersonalInfoActivity"></activity>
+        <activity android:name="TabMainActivity"></activity>
     </application>
 
 </manifest>
