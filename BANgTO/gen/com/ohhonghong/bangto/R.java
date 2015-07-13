@@ -473,18 +473,23 @@ containing a value of this type.
         public static final int common_signin_btn_text_normal_light=0x7f02001c;
         public static final int common_signin_btn_text_pressed_dark=0x7f02001d;
         public static final int common_signin_btn_text_pressed_light=0x7f02001e;
-        public static final int ic_launcher=0x7f02001f;
-        public static final int ic_plusone_medium_off_client=0x7f020020;
-        public static final int ic_plusone_small_off_client=0x7f020021;
-        public static final int ic_plusone_standard_off_client=0x7f020022;
-        public static final int ic_plusone_tall_off_client=0x7f020023;
-        public static final int loading5=0x7f020024;
-        public static final int powered_by_google_dark=0x7f020025;
-        public static final int powered_by_google_light=0x7f020026;
-        public static final int tomato5=0x7f020027;
+        public static final int groupmenu_addbutton=0x7f02001f;
+        public static final int groupmenu_dialog_groupname=0x7f020020;
+        public static final int groupmenu_dialog_invite=0x7f020021;
+        public static final int groupmenu_item=0x7f020022;
+        public static final int groupmenu_shape=0x7f020023;
+        public static final int ic_launcher=0x7f020024;
+        public static final int ic_plusone_medium_off_client=0x7f020025;
+        public static final int ic_plusone_small_off_client=0x7f020026;
+        public static final int ic_plusone_standard_off_client=0x7f020027;
+        public static final int ic_plusone_tall_off_client=0x7f020028;
+        public static final int loading_shape=0x7f020029;
+        public static final int login_shape=0x7f02002a;
+        public static final int powered_by_google_dark=0x7f02002b;
+        public static final int powered_by_google_light=0x7f02002c;
     }
     public static final class id {
-        public static final int action_settings=0x7f07001c;
+        public static final int action_settings=0x7f070022;
         public static final int adjust_height=0x7f070001;
         public static final int adjust_width=0x7f070002;
         public static final int book_now=0x7f070012;
@@ -493,12 +498,17 @@ containing a value of this type.
         public static final int buy_with_google=0x7f070014;
         public static final int cast_notification_id=0x7f070000;
         public static final int classic=0x7f070016;
+        public static final int dismissable_container=0x7f07001a;
         public static final int donate_with_google=0x7f070015;
+        public static final int etGroupName=0x7f07001e;
         public static final int grayscale=0x7f070017;
+        public static final int groupAddButton=0x7f07001c;
         public static final int holo_dark=0x7f070008;
         public static final int holo_light=0x7f070009;
         public static final int hybrid=0x7f070004;
-        public static final int imageView1=0x7f07001a;
+        public static final int imageView1=0x7f07001d;
+        public static final int imageView2=0x7f07001f;
+        public static final int listview=0x7f07001b;
         public static final int match_parent=0x7f070010;
         public static final int monochrome=0x7f070018;
         public static final int none=0x7f070003;
@@ -507,11 +517,12 @@ containing a value of this type.
         public static final int sandbox=0x7f07000b;
         public static final int satellite=0x7f070006;
         public static final int selectionDetails=0x7f07000f;
-        public static final int sign_in_button=0x7f07001b;
+        public static final int sign_in_button=0x7f070021;
         public static final int slide=0x7f070019;
         public static final int strict_sandbox=0x7f07000c;
         public static final int terrain=0x7f070007;
         public static final int test=0x7f07000d;
+        public static final int tvGroupName=0x7f070020;
         public static final int wrap_content=0x7f070011;
     }
     public static final class integer {
@@ -519,8 +530,11 @@ containing a value of this type.
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int loading=0x7f030001;
-        public static final int login=0x7f030002;
+        public static final int groupmenu=0x7f030001;
+        public static final int groupmenu_add_dialog=0x7f030002;
+        public static final int groupmenu_item=0x7f030003;
+        public static final int loading=0x7f030004;
+        public static final int login=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
