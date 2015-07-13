@@ -40,8 +40,8 @@ public class TabMainActivity extends TabActivity {
 		tabSpec2.setContent(new Intent(this,BankActivity.class));
 		tabHost.addTab(tabSpec2);
 
-		TabSpec tabSpec3 = tabHost.newTabSpec("TAG2").setIndicator(tabwidget03);
-		tabSpec3.setContent(R.id.layout_manage);
+		TabSpec tabSpec3 = tabHost.newTabSpec("TAG3").setIndicator(tabwidget03);
+		tabSpec3.setContent(new Intent(this,MoneyActivity.class));
 		tabHost.addTab(tabSpec3);
 
 		tabHost.setCurrentTab(0);

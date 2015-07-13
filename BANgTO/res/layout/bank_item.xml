@@ -15,7 +15,7 @@
             android:layout_marginLeft="25dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:text="신현혜" />
 
        
@@ -28,7 +28,7 @@
             android:layout_marginLeft="25dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:text="최서진" />
 
        
@@ -40,7 +40,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="15dp"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:text="1000원" />
 
     </LinearLayout>
