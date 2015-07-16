@@ -36,7 +36,8 @@
         <activity android:name="BankActivity"></activity>
         <activity android:name="PersonalInfoActivity"></activity>
         <activity android:name="TabMainActivity"></activity>
-         <activity android:name="MoneyActivity"></activity>
+        <activity android:name="MoneyActivity"></activity>
+        <activity android:name="MemberActivity"></activity>
     </application>
 
 </manifest>
