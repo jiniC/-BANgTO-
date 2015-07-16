@@ -2,15 +2,15 @@ package com.ohhonghong.bangto;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +35,11 @@ public class MoneyActivity extends Fragment {
 	GroupAdapter groupadapter;
 	View moneyview;
 	
+	SQLiteDatabase sqlDB1;
+	myDBHelper myHelper;
+	
 	String year, month, day, allday;
+	String valueplus, valueminus, valueall, contents;
 	
 	Context mContext;
 
@@ -57,9 +62,12 @@ public class MoneyActivity extends Fragment {
 		money_dlg_radio_btn_in = (RadioButton) view.findViewById(R.id.money_dlg_radio_btn_in);
 		money_dlg_radio_btn_out = (RadioButton) view.findViewById(R.id.money_dlg_radio_btn_out);
 
+		myHelper = new myDBHelper(mContext);
 		groupadapter=new GroupAdapter(getActivity());
 		money_list.setAdapter(groupadapter);
-		
+		sqlDB1 = myHelper.getReadableDatabase();
+		Cursor cursor; // db의 결과를 받을 수 있는 클래스(cursor)
+
 		groupadapter.addItem("2015/12/11", "10000", "1000000", "100000", "서진이가 빌림");
 		groupadapter.addItem("2015/7/1", "20000", "0", "30000", "서진이가 빌림");
 		groupadapter.addItem("2015/7/1", "10000", "0", "40000", "서진이가 빌림");
@@ -89,12 +97,49 @@ public class MoneyActivity extends Fragment {
 						money_dlg_radio_btn_out = (RadioButton) moneyview.findViewById(R.id.money_dlg_radio_btn_out);
 						money_dlg_edt2 = (EditText) moneyview.findViewById(R.id.money_dlg_edt2);
 
-						//year = Integer.toString(money_dlg_dp.getYear());
+						year = Integer.toString(money_dlg_dp.getYear());
 						month = Integer.toString(money_dlg_dp.getMonth() + 1);
 						day = Integer.toString(money_dlg_dp.getDayOfMonth());
 						allday=month+"/"+day;
-						// etName = dlgET1.getText().toString();
-						// tvName.setText(etName);
+						contents=money_dlg_edt1.getText().toString();
+						 
+						 sqlDB1=myHelper.getWritableDatabase();
+
+						  AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder( mContext); 
+						  // set the title of the Alert Dialog
+						  
+						  alertDialogBuilder.setTitle("SAVE YOUR MONEY");
+						  
+						  // set dialog message 
+						  alertDialogBuilder .setMessage(
+						  "저장 하시겠습니까?") .setCancelable(false)
+						  .setPositiveButton("Yes", new
+						  DialogInterface.OnClickListener() { 
+							  public void onClick( DialogInterface dialog, int id) {
+						  
+						  sqlDB1=myHelper.getWritableDatabase();
+						  
+						  sqlDB1.execSQL("insert into moneyTBL VALUES ('" +
+						  allday + "', '" + valueplus+"', '" + valueminus+
+						  "', '" + valueall+ "', '" + contents+");");
+						  
+						  sqlDB1.close();
+						  
+						  //groupadapter.addItem(allday, valueplus, valueminus,valueall,contents);
+						  Toast.makeText( 
+						  mContext, "가계부가 저장되었습니다 :)", 0) .show();
+						  
+						  } }) .setNegativeButton("No", new
+						  DialogInterface.OnClickListener() { public void
+						  onClick( DialogInterface dialog, int id) { 
+							  // if no is clicked, just close 
+							  // the dialog box and do nothing 
+							  dialog.cancel();
+						  
+						  } }); //
+						  
+						 alertDialogBuilder.show();
+						 
 
 					}
 				});
@@ -207,4 +252,42 @@ public class MoneyActivity extends Fragment {
 	      }
 
 	   }
+	   public class myDBHelper extends SQLiteOpenHelper { public
+			  myDBHelper(Context moneyActivity) { super(
+			  moneyActivity, "MoneyDB", null, 1); }
+			  
+			  @Override
+			  public void onCreate(SQLiteDatabase db) { 
+				  // TODO Auto-generated method stub 
+				  db.execSQL("create table moneyTBL (date CHAR(50), plusmoney CHAR(50), minusmoney CHAR(50), allmoney CHAR(70),contents CHAR(100));");}
+
+			@Override
+			public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+				// TODO Auto-generated method stub
+				db.execSQL("drop table if exists moneyTBL;"); // 이미 그룹테이블이 있으면 지운다.
+				onCreate(db); // 새로운 테이블을 만듦
+			}
+			  }
+			  
+			 
+
+			//라디오 버튼을 선택했을 때
+			public void onCheckedChanged(RadioGroup arg0, int arg1) {
+				// TODO Auto-generated method stub
+
+				switch (arg1) {
+
+				case R.id.money_dlg_radio_btn_in:
+					valueplus="0";
+					valueminus=money_dlg_edt1.getText().toString();
+					valueall="10000";
+					break;
+
+				case R.id.money_dlg_radio_btn_out:
+					valueminus="0";
+					valueplus=money_dlg_edt1.getText().toString();
+					valueall="10000";
+					break;
+				}
+			}
 }
