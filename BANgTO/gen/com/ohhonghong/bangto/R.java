@@ -506,7 +506,7 @@ containing a value of this type.
         public static final int tab_member=0x7f02003d;
     }
     public static final class id {
-        public static final int action_settings=0x7f070043;
+        public static final int action_settings=0x7f070041;
         public static final int adjust_height=0x7f070001;
         public static final int adjust_width=0x7f070002;
         public static final int book_now=0x7f070012;
@@ -534,9 +534,6 @@ containing a value of this type.
         public static final int imageView1=0x7f070026;
         public static final int imageView2=0x7f070028;
         public static final int imageView3=0x7f07003d;
-        public static final int layout_bank=0x7f070041;
-        public static final int layout_manage=0x7f070042;
-        public static final int layout_member=0x7f070040;
         public static final int listview=0x7f07001b;
         public static final int match_parent=0x7f070010;
         public static final int money_balance=0x7f07003a;
@@ -558,6 +555,7 @@ containing a value of this type.
         public static final int monochrome=0x7f070018;
         public static final int none=0x7f070003;
         public static final int normal=0x7f070005;
+        public static final int pager=0x7f070040;
         public static final int plus_btn=0x7f07002d;
         public static final int production=0x7f07000a;
         public static final int sandbox=0x7f07000b;

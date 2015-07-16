@@ -2,11 +2,11 @@ package com.ohhonghong.bangto;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,20 +17,27 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class BankActivity extends Activity {
+public class BankActivity extends Fragment {
 	public ListView mListView = null;
 	public CustomAdapter mAdapter = null;
 	ImageButton ib_manage_add;
 	View dlgview;
 	EditText etTo, etFrom, etMoney;
-
+	
+	Context mContext;
+	
+	public BankActivity(Context context) {
+		mContext = context;
+	}
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public View  onCreateView(LayoutInflater inflater, 
+			ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.bank);
+		View view = inflater.inflate(R.layout.bank, null);
 
-		mListView = (ListView) findViewById(R.id.listview);
-		mAdapter = new CustomAdapter(this);
+		mListView = (ListView) view.findViewById(R.id.listview);
+		mAdapter = new CustomAdapter(mContext);
 		mListView.setAdapter(mAdapter);
 
 		mAdapter.addItem("신현혜", "최서진", "1000원");
@@ -49,15 +56,15 @@ public class BankActivity extends Activity {
 		mAdapter.addItem("신현혜", "최서진", "1000원");
 		mAdapter.addItem("신현혜", "최서진", "1000원");
 
-		ib_manage_add = (ImageButton) findViewById(R.id.ib_manage_add);
+		ib_manage_add = (ImageButton) view.findViewById(R.id.ib_manage_add);
 
 		ib_manage_add.setOnClickListener(new OnClickListener() {
 
 			@Override
-			public void onClick(View arg0) {
+			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				dlgview = (View) View.inflate(BankActivity.this, R.layout.bank_add_dialog, null);
-				AlertDialog.Builder dlg = new AlertDialog.Builder(BankActivity.this);
+				dlgview = (View) View.inflate(getActivity(), R.layout.bank_add_dialog, null);
+				AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
 
 				dlg.setView(dlgview);
 				etTo = (EditText) dlgview.findViewById(R.id.etTo);
@@ -82,6 +89,7 @@ public class BankActivity extends Activity {
 				dlg.show();
 			}
 		});
+		return view;
 	}
 
 	class ViewHolder {

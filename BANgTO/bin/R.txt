@@ -127,7 +127,7 @@ int drawable t_num 0x7f02003a
 int drawable tab_bank 0x7f02003b
 int drawable tab_manage 0x7f02003c
 int drawable tab_member 0x7f02003d
-int id action_settings 0x7f070043
+int id action_settings 0x7f070041
 int id adjust_height 0x7f070001
 int id adjust_width 0x7f070002
 int id book_now 0x7f070012
@@ -155,9 +155,6 @@ int id ib_manage_add 0x7f07001c
 int id imageView1 0x7f070026
 int id imageView2 0x7f070028
 int id imageView3 0x7f07003d
-int id layout_bank 0x7f070041
-int id layout_manage 0x7f070042
-int id layout_member 0x7f070040
 int id listview 0x7f07001b
 int id match_parent 0x7f070010
 int id money_balance 0x7f07003a
@@ -179,6 +176,7 @@ int id money_plus 0x7f070038
 int id monochrome 0x7f070018
 int id none 0x7f070003
 int id normal 0x7f070005
+int id pager 0x7f070040
 int id plus_btn 0x7f07002d
 int id production 0x7f07000a
 int id sandbox 0x7f07000b
