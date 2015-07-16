@@ -6,12 +6,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -25,6 +28,7 @@ public class GroupMenuActivity extends Activity {
 	ImageButton groupAddButton;
 	EditText etGroupName;
 
+	Typeface childFont;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,6 +47,30 @@ public class GroupMenuActivity extends Activity {
 		mAdapter.addItem("일곱 번째 그룹");
 		mAdapter.addItem("여덟 번째 그룹");
 		
+		mListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				// 두가지 방법 모두 사용가능하다.
+				// Data data = (Data) parent.getItemAtPosition(position);
+		        //Data data = mList.get(position);
+		         
+		        // 다음 액티비티로 넘길 Bundle 데이터를 만든다.
+		        //Bundle extras = new Bundle();
+		        //extras.putString("title", data.getTitle());
+		        //extras.putString("description", data.getDescription());
+		        //extras.putInt("color", data.getColor());
+		         
+		         
+		        Intent intent = new Intent(getApplicationContext(), TabMainActivity.class);
+		         
+		        // 위에서 만든 Bundle을 인텐트에 넣는다.
+		        //intent.putExtras(extras);
+		        // 액티비티를 생성한다.
+		        startActivity(intent);
+			}
+		});
 
 		groupAddButton.setOnClickListener(new OnClickListener() {
 
@@ -116,7 +144,7 @@ public class GroupMenuActivity extends Activity {
 				//Typeface face = Typeface.createFromAsset(getAssets(), "fonts/KoreanYNMYTL.ttf");
 
 				//tv.setTypeface(face);
-
+				
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();

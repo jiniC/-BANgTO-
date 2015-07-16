@@ -82,7 +82,7 @@
             android:id="@+id/money_dlg_edt2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="7"
+            android:ems="6"
              />
 
         <TextView
