@@ -35,7 +35,7 @@ public class BankActivity extends Fragment {
 			ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		View view = inflater.inflate(R.layout.bank, null);
-
+		
 		mListView = (ListView) view.findViewById(R.id.listview);
 		mAdapter = new CustomAdapter(mContext);
 		mListView.setAdapter(mAdapter);
