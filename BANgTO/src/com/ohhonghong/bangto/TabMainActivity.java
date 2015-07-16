@@ -6,6 +6,7 @@ import android.R.drawable;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -21,6 +22,7 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,6 +54,9 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
 			// this tab is selected.
 			actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
 		}*/
+		
+		
+		
 		actionBar.addTab(actionBar.newTab().setText("멤버").setTabListener(this));
 		actionBar.addTab(actionBar.newTab().setText("주고받기").setTabListener(this));
 		actionBar.addTab(actionBar.newTab().setText("가계부").setTabListener(this));
@@ -92,18 +97,20 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
 	public void onTabReselected(Tab tab, android.app.FragmentTransaction ft) {
 		// TODO Auto-generated method stub
 		mViewPager.setCurrentItem(tab.getPosition());
+		mViewPager.setBackground(getResources().getDrawable(R.drawable.tab_member));
 	}
 
 	@Override
 	public void onTabSelected(Tab tab, android.app.FragmentTransaction ft) {
 		// TODO Auto-generated method stub
 		mViewPager.setCurrentItem(tab.getPosition());
+		mViewPager.setBackground(getResources().getDrawable(R.drawable.tab_member));
 	}
 
 	@Override
 	public void onTabUnselected(Tab tab, android.app.FragmentTransaction ft) {
 		// TODO Auto-generated method stub
-
+		mViewPager.setBackground(getResources().getDrawable(R.drawable.tab_member));
 	}
 
 }

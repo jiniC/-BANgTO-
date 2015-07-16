@@ -218,7 +218,6 @@ int layout money_add_dialog 0x7f03000c
 int layout money_item 0x7f03000d
 int layout personal_info 0x7f03000e
 int layout tab 0x7f03000f
-int layout tab_member 0x7f030010
 int menu main 0x7f0b0000
 int raw gtm_analytics 0x7f040000
 int string accept 0x7f060002

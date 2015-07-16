@@ -601,7 +601,6 @@ containing a value of this type.
         public static final int money_item=0x7f03000d;
         public static final int personal_info=0x7f03000e;
         public static final int tab=0x7f03000f;
-        public static final int tab_member=0x7f030010;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
