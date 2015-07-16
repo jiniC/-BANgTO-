@@ -1,19 +1,17 @@
 package com.ohhonghong.bangto;
 
-import java.util.Locale;
-
-import android.R.drawable;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 public class TabMainActivity extends FragmentActivity implements ActionBar.TabListener {
@@ -110,5 +108,25 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
    public void onTabUnselected(Tab tab, android.app.FragmentTransaction ft) {
       // TODO Auto-generated method stub\
    }
+   @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			
+			Intent intent = new Intent(getApplicationContext(), MemoActivity.class);
+			startActivity(intent);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 }

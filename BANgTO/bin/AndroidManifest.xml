@@ -41,6 +41,7 @@
         <activity android:name="MoneyActivity"></activity>
         <activity android:name="MemberActivity"></activity>
         <activity android:name="LoadingActivity"></activity>
+        <activity android:name="MemoActivity"></activity>
     </application>
 
 </manifest>
