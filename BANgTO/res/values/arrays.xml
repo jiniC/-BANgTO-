@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="bankname">
+        <item>  은행을 선택해주세요  </item>
+        <item>광주은행</item>
+        <item>경남은행</item>
+        <item>교보증권</item>
+        <item>국민은행</item>
+        <item>기업은행</item>
+        <item>농협</item>
+        <item>도이치뱅크</item>
+        <item>동부증권</item>
+        <item>대구은행</item>
+        <item>대신증권</item>
+        <item>대우증권</item>
+        <item>메리츠증권</item>
+        <item>미래에셋</item>
+        <item>부국증권</item>
+        <item>부산은행</item>
+        <item>산림조합</item>
+        <item>산업은행</item>
+        <item>삼성증권</item>
+        <item>상호저축은행</item>
+        <item>새마을금고</item>
+        <item>수협중앙회</item>
+        <item>신영증권</item>
+        <item>신용협동조합</item>
+        <item>신한금융투자</item>
+        <item>신한은행</item>
+        <item>아이엠증권</item>
+        <item>우리은행</item>
+        <item>우체국</item>
+        <item>유안타증권</item>
+        <item>유진증권</item>
+        <item>외환은행</item>
+        <item>이베스트투자증권</item>
+        <item>전북은행</item>
+        <item>중국공상은행</item>
+        <item>제주은행</item>
+        <item>키움증권</item>
+        <item>한국씨티은행</item>
+        <item>한국투자</item>
+        <item>하나대투증권</item>
+        <item>하나은행</item>
+        <item>현대증권</item>
+        <item>하이투자증권</item>
+        <item>한화투자증권</item>
+        <item>BNP파리바은행</item>
+        <item>BOA</item>
+        <item>HMC증권</item>
+        <item>HSBC</item>
+        <item>JP모간</item>
+        <item>LIG증권</item>
+        <item>NH투자증권</item>
+        <item>SC은행</item>
+        <item>SK증권</item>
+    </string-array>
+
+</resources>

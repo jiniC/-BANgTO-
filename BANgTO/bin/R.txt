@@ -1,3 +1,4 @@
+int array bankname 0x7f0a0000
 int attr adSize 0x7f010000
 int attr adSizes 0x7f010001
 int attr adUnitId 0x7f010002
@@ -63,8 +64,8 @@ int color wallet_holo_blue_light 0x7f080015
 int color wallet_link_text_light 0x7f080016
 int color wallet_primary_text_holo_light 0x7f080019
 int color wallet_secondary_text_holo_dark 0x7f08001a
-int dimen activity_horizontal_margin 0x7f0a0000
-int dimen activity_vertical_margin 0x7f0a0001
+int dimen activity_horizontal_margin 0x7f0b0000
+int dimen activity_vertical_margin 0x7f0b0001
 int drawable add_member 0x7f020000
 int drawable cast_ic_notification_0 0x7f020001
 int drawable cast_ic_notification_1 0x7f020002
@@ -218,7 +219,7 @@ int layout money_add_dialog 0x7f03000c
 int layout money_item 0x7f03000d
 int layout personal_info 0x7f03000e
 int layout tab 0x7f03000f
-int menu main 0x7f0b0000
+int menu main 0x7f0c0000
 int raw gtm_analytics 0x7f040000
 int string accept 0x7f060002
 int string action_settings 0x7f06002e
