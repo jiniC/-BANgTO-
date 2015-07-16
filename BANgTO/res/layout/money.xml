@@ -21,47 +21,45 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/money_dialog_imgv" />
- </LinearLayout>
-        <RelativeLayout
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="4"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:layout_weight="4"
-            android:background="#ffffff"
-            android:orientation="vertical"
-             >
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true" >
 
-            <ScrollView
+            <LinearLayout
+                android:id="@+id/dismissable_container"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:fillViewport="true" >
-
-                <LinearLayout
-                    android:id="@+id/dismissable_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" />
-            </ScrollView>
-
-            <ListView
-                android:id="@+id/money_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                 >
-            </ListView>
-
-            <ImageButton
-                android:id="@+id/plus_btn"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:background="#00000000"
-                android:src="@drawable/plus_btn" >
-            </ImageButton>
-        </RelativeLayout>
-   
+                android:orientation="vertical" />
+        </ScrollView>
+
+        <ListView
+            android:id="@+id/money_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+        </ListView>
+
+        <ImageButton
+            android:id="@+id/plus_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="#00000000"
+            android:src="@drawable/plus_btn2" >
+        </ImageButton>
+    </RelativeLayout>
 
 </LinearLayout>
