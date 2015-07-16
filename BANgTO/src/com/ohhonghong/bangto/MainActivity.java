@@ -29,11 +29,13 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
+      startActivity(new Intent(this, LoadingActivity.class));
       setContentView(R.layout.login);
       final ActionBar actionBar = getActionBar();
       actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
       actionBar.setDisplayShowTitleEnabled(false);
       actionBar.setDisplayShowHomeEnabled(false);
+      actionBar.hide();
       mPlusClient = new GoogleApiClient.Builder(this).addApi(Plus.API).addScope(Plus.SCOPE_PLUS_LOGIN)
             .addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
       // Progress bar to be displayed if the connection failure is not

@@ -2,6 +2,7 @@ package com.ohhonghong.bangto;
 
 import java.util.ArrayList;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -33,6 +34,13 @@ public class GroupMenuActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.groupmenu);
+		
+		final ActionBar actionBar = getActionBar();
+	      actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+	      actionBar.setDisplayShowTitleEnabled(false);
+	      actionBar.setDisplayShowHomeEnabled(false);
+	      actionBar.hide();
+		
 		mListView = (ListView) findViewById(R.id.listview);
 		groupAddButton = (ImageButton) findViewById(R.id.groupAddButton);
 		mAdapter = new GroupAdapter(this);
