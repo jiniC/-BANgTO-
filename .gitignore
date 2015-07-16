@@ -4,6 +4,7 @@
 *.pydevproject
 .metadata
 .gradle
+.properties
 bin/
 tmp/
 *.tmp
