@@ -34,23 +34,13 @@ public class TabMainActivity  extends FragmentActivity implements ActionBar.TabL
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-
-<<<<<<< HEAD
-		// When swiping between different sections, select the corresponding
-		// tab. We can also use ActionBar.Tab#select() to do this if we have
-		// a reference to the Tab.
-		mViewPager
-				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+		
+		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 					@Override
 					public void onPageSelected(int position) {
 						actionBar.setSelectedNavigationItem(position);
 					}
 				});
-=======
-		TabSpec tabSpec1 = tabHost.newTabSpec("TAG1").setIndicator(tabwidget01);
-		tabSpec1.setContent(new Intent(this,MemberActivity.class));
-		tabHost.addTab(tabSpec1);
->>>>>>> 2ff74ba3ac53441f6590536bc8d8d627955e2589
 
 		// For each of the sections in the app, add a tab to the action bar.
 		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
@@ -78,11 +68,11 @@ public class TabMainActivity  extends FragmentActivity implements ActionBar.TabL
 				// below) with the page number as its lone argument.
 				switch (position) {
 				case 0:
-					return new BankActivity(mContext);
+					return new MemberActivity(mContext);
 				case 1:
 					return new BankActivity(mContext);
 				case 2:
-					return new BankActivity(mContext);
+					return new MoneyActivity(mContext);
 				}
 				return null;
 			}

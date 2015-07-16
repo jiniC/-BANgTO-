@@ -508,12 +508,8 @@ containing a value of this type.
         public static final int tab_member=0x7f02003f;
     }
     public static final class id {
-<<<<<<< HEAD
-        public static final int action_settings=0x7f070041;
-=======
-        public static final int action_settings=0x7f070049;
+        public static final int action_settings=0x7f070047;
         public static final int add_member_btn=0x7f07002d;
->>>>>>> 2ff74ba3ac53441f6590536bc8d8d627955e2589
         public static final int adjust_height=0x7f070001;
         public static final int adjust_width=0x7f070002;
         public static final int book_now=0x7f070012;
@@ -540,14 +536,7 @@ containing a value of this type.
         public static final int ib_manage_add=0x7f07001c;
         public static final int imageView1=0x7f070026;
         public static final int imageView2=0x7f070028;
-<<<<<<< HEAD
-        public static final int imageView3=0x7f07003d;
-=======
         public static final int imageView3=0x7f070043;
-        public static final int layout_bank=0x7f070047;
-        public static final int layout_manage=0x7f070048;
-        public static final int layout_member=0x7f070046;
->>>>>>> 2ff74ba3ac53441f6590536bc8d8d627955e2589
         public static final int listview=0x7f07001b;
         public static final int match_parent=0x7f070010;
         public static final int member_account=0x7f070030;
@@ -574,12 +563,8 @@ containing a value of this type.
         public static final int monochrome=0x7f070018;
         public static final int none=0x7f070003;
         public static final int normal=0x7f070005;
-<<<<<<< HEAD
-        public static final int pager=0x7f070040;
-        public static final int plus_btn=0x7f07002d;
-=======
+        public static final int pager=0x7f070046;
         public static final int plus_btn=0x7f070033;
->>>>>>> 2ff74ba3ac53441f6590536bc8d8d627955e2589
         public static final int production=0x7f07000a;
         public static final int sandbox=0x7f07000b;
         public static final int satellite=0x7f070006;

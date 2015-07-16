@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +23,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MoneyActivity extends Activity {
+public class MoneyActivity extends Fragment {
 	ListView money_list;
 	ImageButton plus_btn;
 	ImageView money_imgv;
@@ -34,21 +35,29 @@ public class MoneyActivity extends Activity {
 	View moneyview;
 	
 	String year, month, day, allday;
+	
+	Context mContext;
+
+	public MoneyActivity(Context context) {
+		mContext = context;
+	}
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public View  onCreateView(LayoutInflater inflater, 
+			ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.money);
-		money_list = (ListView) findViewById(R.id.money_list);
-		plus_btn = (ImageButton) findViewById(R.id.plus_btn);
-		money_imgv = (ImageView) findViewById(R.id.money_imgv);
-		money_dlg_dp = (DatePicker) findViewById(R.id.money_dlg_dp);
-		money_dlg_edt1 = (EditText) findViewById(R.id.money_dlg_edt1);
-		money_dlg_edt2 = (EditText) findViewById(R.id.money_dlg_edt2);
-		money_dlg_radio_btn_in = (RadioButton) findViewById(R.id.money_dlg_radio_btn_in);
-		money_dlg_radio_btn_out = (RadioButton) findViewById(R.id.money_dlg_radio_btn_out);
+		View view = inflater.inflate(R.layout.money, null);
+		
+		money_list = (ListView) view.findViewById(R.id.money_list);
+		plus_btn = (ImageButton) view.findViewById(R.id.plus_btn);
+		money_imgv = (ImageView) view.findViewById(R.id.money_imgv);
+		money_dlg_dp = (DatePicker) view.findViewById(R.id.money_dlg_dp);
+		money_dlg_edt1 = (EditText) view.findViewById(R.id.money_dlg_edt1);
+		money_dlg_edt2 = (EditText) view.findViewById(R.id.money_dlg_edt2);
+		money_dlg_radio_btn_in = (RadioButton) view.findViewById(R.id.money_dlg_radio_btn_in);
+		money_dlg_radio_btn_out = (RadioButton) view.findViewById(R.id.money_dlg_radio_btn_out);
 
-		groupadapter=new GroupAdapter(this);
+		groupadapter=new GroupAdapter(getActivity());
 		money_list.setAdapter(groupadapter);
 		
 		groupadapter.addItem("2015/12/11", "10000", "1000000", "100000", "서진이가 빌림");
@@ -64,8 +73,8 @@ public class MoneyActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				moneyview = (View) View.inflate(MoneyActivity.this, R.layout.money_add_dialog, null);
-				AlertDialog.Builder dlg = new AlertDialog.Builder(MoneyActivity.this);
+				moneyview = (View) View.inflate(getActivity(), R.layout.money_add_dialog, null);
+				AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
 				dlg.setView(moneyview);
 
 				dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -96,7 +105,7 @@ public class MoneyActivity extends Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
 
-						Toast tMsg=Toast.makeText(MoneyActivity.this, "취소 :)", Toast.LENGTH_LONG);
+						Toast tMsg=Toast.makeText(getActivity(), "취소 :)", Toast.LENGTH_LONG);
 						tMsg.show();
 					}
 				});
@@ -104,27 +113,9 @@ public class MoneyActivity extends Activity {
 			}
 
 		});
+		return view;
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-	
 	class ViewHolder {
 		// 날짜
 		public TextView money_data;
