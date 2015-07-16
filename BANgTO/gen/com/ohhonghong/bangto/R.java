@@ -8,6 +8,9 @@
 package com.ohhonghong.bangto;
 
 public final class R {
+    public static final class array {
+        public static final int bankname=0x7f0a0000;
+    }
     public static final class attr {
         /** 
     The size of the ad. It must be one of BANNER, FULL_BANNER, LEADERBOARD,
@@ -438,8 +441,8 @@ containing a value of this type.
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f0a0000;
-        public static final int activity_vertical_margin=0x7f0a0001;
+        public static final int activity_horizontal_margin=0x7f0b0000;
+        public static final int activity_vertical_margin=0x7f0b0001;
     }
     public static final class drawable {
         public static final int add_btn=0x7f020000;
@@ -604,7 +607,7 @@ containing a value of this type.
         public static final int tab=0x7f03000f;
     }
     public static final class menu {
-        public static final int main=0x7f0b0000;
+        public static final int main=0x7f0c0000;
     }
     public static final class raw {
         public static final int gtm_analytics=0x7f040000;
