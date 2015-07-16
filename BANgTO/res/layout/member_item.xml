@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/member_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"
+            android:paddingBottom="5dp"
+            android:paddingLeft="18dp"
+            android:paddingTop="5dp"
+            android:text="진행지"
+            android:textSize="20sp" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/member_bank"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:text="국민은행"
+            android:textSize="20sp" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/member_account"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text="91353211234567"
+            android:textSize="22sp" >
+        </TextView>
+    </LinearLayout>
+
+</LinearLayout>

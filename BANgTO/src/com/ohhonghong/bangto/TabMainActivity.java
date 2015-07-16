@@ -33,7 +33,7 @@ public class TabMainActivity extends TabActivity {
 		tabwidget03.setImageResource(R.drawable.tab_manage);
 
 		TabSpec tabSpec1 = tabHost.newTabSpec("TAG1").setIndicator(tabwidget01);
-		tabSpec1.setContent(R.id.layout_member);
+		tabSpec1.setContent(new Intent(this,MemberActivity.class));
 		tabHost.addTab(tabSpec1);
 
 		TabSpec tabSpec2 = tabHost.newTabSpec("TAG2").setIndicator(tabwidget02);
