@@ -97,20 +97,17 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
 	public void onTabReselected(Tab tab, android.app.FragmentTransaction ft) {
 		// TODO Auto-generated method stub
 		mViewPager.setCurrentItem(tab.getPosition());
-		mViewPager.setBackground(getResources().getDrawable(R.drawable.tab_member));
 	}
 
 	@Override
 	public void onTabSelected(Tab tab, android.app.FragmentTransaction ft) {
 		// TODO Auto-generated method stub
 		mViewPager.setCurrentItem(tab.getPosition());
-		mViewPager.setBackground(getResources().getDrawable(R.drawable.tab_member));
 	}
 
 	@Override
 	public void onTabUnselected(Tab tab, android.app.FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-		mViewPager.setBackground(getResources().getDrawable(R.drawable.tab_member));
+		// TODO Auto-generated method stub\
 	}
 
 }

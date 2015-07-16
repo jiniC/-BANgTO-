@@ -65,6 +65,13 @@
             android:layout_weight="1"
             android:ems="10" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="8pt"
+            android:text="원" />
+
     </LinearLayout>
 
 </LinearLayout>

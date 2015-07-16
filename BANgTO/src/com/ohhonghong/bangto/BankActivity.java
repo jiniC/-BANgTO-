@@ -2,9 +2,12 @@ package com.ohhonghong.bangto;
 
 import java.util.ArrayList;
 
+import com.ohhonghong.bangto.MoneyActivity.myDBHelper;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -25,6 +28,9 @@ public class BankActivity extends Fragment {
 	EditText etTo, etFrom, etMoney;
 	
 	Context mContext;
+	
+	SQLiteDatabase sqlDB1,sqlDB2;
+	myDBHelper myHelper;
 	
 	public BankActivity(Context context) {
 		mContext = context;
