@@ -59,7 +59,7 @@ public class MemoActivity extends Activity {
 				String sendmessage = message.getText().toString();
 				message.setText("");
 				ListDataMemo data = null;
-				data = new ListDataMemo((byte) 1, sendmessage, m_time_format.format(new Date()));
+				data = new ListDataMemo((byte) 1, sendmessage, m_date_format.format(new Date()));
 
 				m_adapter.add(data);
 				
