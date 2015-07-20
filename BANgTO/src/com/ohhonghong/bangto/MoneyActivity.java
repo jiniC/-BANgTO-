@@ -41,7 +41,7 @@ public class MoneyActivity extends Fragment {
 	String year, month, day, allday;
 	String valueplus, valueminus, valueall, contents;
 	String dbdate,dbvalueplus, dbvalueminus,dbvalueall, dbcontents;
-	String sum2;
+	String sum;
 	int valueallsum = 0;
 	Context mContext;
 
@@ -123,16 +123,15 @@ public class MoneyActivity extends Fragment {
 						Cursor cursor; // db의 결과를 받을 수 있는 클래스(cursor)
 						cursor = sqlDB2.rawQuery("select * from moneyTBL;", null);
 						while(cursor.moveToNext()){
-							dbvalueall =  cursor.getString(3);
-							sum2 = dbvalueall.toString();
+							sum =  cursor.getString(3).toString();
 						}
 						cursor.close();
 						sqlDB2.close();
 						
-						int a =  Integer.parseInt(sum2);
+						int a =  Integer.parseInt(sum);
 						int b = Integer.parseInt(valueplus);
 						int c =  Integer.parseInt(valueminus);
-						valueallsum = a+ b-c;
+						valueallsum =  a+b - c + 0;
 						valueall = Integer.toString(valueallsum);
 						AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
 						// set the title of the Alert Dialog
@@ -152,10 +151,6 @@ public class MoneyActivity extends Fragment {
 								sqlDB1.close();
 								// Toast.makeText(
 								// mContext, "가계부가 저장되었습니다 :)", 0) .show();
-								
-								
-								
-
 							}
 						}).setNegativeButton("No", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
@@ -289,9 +284,8 @@ public class MoneyActivity extends Fragment {
 		@Override
 		public void onCreate(SQLiteDatabase db) {
 			// TODO Auto-generated method stub
-			db.execSQL(
-					"create table moneyTBL (date CHAR(50), plusmoney CHAR(50), minusmoney CHAR(50), allmoney CHAR(70),contents CHAR(100));");
-			db.execSQL("insert into moneyTBL VALUES ('0000/0/0','0','0','0','돈을 넣어주세요');");
+			db.execSQL("create table moneyTBL (date CHAR(50), plusmoney CHAR(50), minusmoney CHAR(50), allmoney CHAR(70),contents CHAR(100));");
+			db.execSQL("insert into moneyTBL VALUES ('0000/0/0','0','0','0','-')");
 		}
 
 		@Override

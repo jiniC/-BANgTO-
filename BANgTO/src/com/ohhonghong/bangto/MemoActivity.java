@@ -8,6 +8,7 @@ import java.util.Locale;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,7 +20,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class MemoActivity extends Activity {
+public class MemoActivity extends Fragment {
 	
 	private MemoAdapter m_adapter = null;
 	private ListView m_list = null;
@@ -31,24 +32,32 @@ public class MemoActivity extends Activity {
 
 	ImageButton sendbutton;
 	TextView message;
+	
+	Context mContext;
 
+	public MemoActivity(Context context) {
+		mContext = context;
+	}
+
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public View  onCreateView(LayoutInflater inflater, 
+			ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.memo);
-
+		View view = inflater.inflate(R.layout.memo, null);
+		
 		ArrayList<ListDataMemo> data_list = new ArrayList<ListDataMemo>();
 
 		m_adapter = new MemoAdapter(data_list);
 
-		m_list = (ListView) findViewById(R.id.var_list);
+		m_list = (ListView) view.findViewById(R.id.var_list);
 		m_list.setAdapter(m_adapter);
 
 		m_date_format = new SimpleDateFormat("yyyy/MM/dd", Locale.KOREA);
 		m_time_format = new SimpleDateFormat("HH:mm:ss", Locale.KOREA);
 
-		sendbutton = (ImageButton) findViewById(R.id.sendbutton);
-		message = (TextView) findViewById(R.id.message);
+		sendbutton = (ImageButton) view.findViewById(R.id.sendbutton);
+		message = (TextView) view.findViewById(R.id.message);
 
 		sendbutton.setOnClickListener(new OnClickListener() {
 
@@ -78,6 +87,7 @@ public class MemoActivity extends Activity {
 				return false;
 			}
 		});
+		return view;
 	}
 
 	private class MemoAdapter extends BaseAdapter {
@@ -88,7 +98,7 @@ public class MemoActivity extends Activity {
 		public MemoAdapter(ArrayList<ListDataMemo> items) {
 			m_data_list = items;
 
-			m_inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			m_inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		}
 
 

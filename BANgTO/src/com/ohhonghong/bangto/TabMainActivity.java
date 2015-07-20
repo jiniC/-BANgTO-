@@ -4,6 +4,8 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -16,7 +18,6 @@ import android.widget.LinearLayout;
 
 public class TabMainActivity extends FragmentActivity implements ActionBar.TabListener {
 
-   LinearLayout layout_member, layout_bank, layout_manage;
    SectionsPagerAdapter mSectionsPagerAdapter;
    ViewPager mViewPager;
 
@@ -43,22 +44,17 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
             actionBar.setSelectedNavigationItem(position);
          }
       });
-
-      /*
-      // For each of the sections in the app, add a tab to the action bar.
-      for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-         // Create a tab with text corresponding to the page title defined by
-         // the adapter. Also specify this Activity object, which implements
-         // the TabListener interface, as the callback (listener) for when
-         // this tab is selected.
-         actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
-      }*/
-      
-      
       
       actionBar.addTab(actionBar.newTab().setText("멤버").setTabListener(this));
       actionBar.addTab(actionBar.newTab().setText("주고받기").setTabListener(this));
       actionBar.addTab(actionBar.newTab().setText("가계부").setTabListener(this));
+      actionBar.addTab(actionBar.newTab().setText("채팅").setTabListener(this));
+      
+      ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#ffffff"));
+      actionBar.setStackedBackgroundDrawable(colorDrawable);
+      
+      //mTabs.add(new SamplePagerItem(getString(R.string.tab_stream),Color.BLUE,Color.GRAY));
+      
    }
 
    public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -81,6 +77,8 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
             return new BankActivity(mContext);
          case 2:
             return new MoneyActivity(mContext);
+         case 3:
+        	 return new MemoActivity(mContext);
          }
          return null;
       }
@@ -88,7 +86,7 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
       @Override
       public int getCount() {
          // Show 3 total pages.
-         return 3;
+         return 4;
       }
    }
 
@@ -108,6 +106,8 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
    public void onTabUnselected(Tab tab, android.app.FragmentTransaction ft) {
       // TODO Auto-generated method stub\
    }
+   
+   /*
    @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -122,11 +122,10 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
-			
 			Intent intent = new Intent(getApplicationContext(), MemoActivity.class);
 			startActivity(intent);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
+	}*/
 }
