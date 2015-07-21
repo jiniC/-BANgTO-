@@ -93,7 +93,7 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
       // String accountName = mPlusClient.getAccountName();
       // Toast.makeText(this, accountName + " is connected.",
       // Toast.LENGTH_LONG).show();
-      Intent intent = new Intent(this, GroupMenuActivity.class);
+      Intent intent = new Intent(this, PersonalInfoActivity.class);
       startActivity(intent);
    }
 

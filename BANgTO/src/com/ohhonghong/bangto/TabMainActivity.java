@@ -50,7 +50,7 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
       actionBar.addTab(actionBar.newTab().setText("가계부").setTabListener(this));
       actionBar.addTab(actionBar.newTab().setText("채팅").setTabListener(this));
       
-      ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#ffffff"));
+      ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#d70000"));
       actionBar.setStackedBackgroundDrawable(colorDrawable);
       
       //mTabs.add(new SamplePagerItem(getString(R.string.tab_stream),Color.BLUE,Color.GRAY));
