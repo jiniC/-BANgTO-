@@ -398,6 +398,17 @@ containing a value of this type.
         public static final int zOrderOnTop=0x7f010014;
     }
     public static final class color {
+        public static final int actionbar_background=0x7f080018;
+        public static final int actionbar_menu_text=0x7f080019;
+        public static final int actionbar_tab_text=0x7f08001b;
+        public static final int actionbar_title_text=0x7f08001a;
+        public static final int bgcolor_intro=0x7f080017;
+        public static final int bgcolor_tab_selected=0x7f08001d;
+        public static final int bgcolor_tab_selected_focused=0x7f08001f;
+        public static final int bgcolor_tab_selected_pressedd=0x7f080021;
+        public static final int bgcolor_tab_unselected=0x7f08001c;
+        public static final int bgcolor_tab_unselected_focused=0x7f08001e;
+        public static final int bgcolor_tab_unselected_pressed=0x7f080020;
         public static final int common_action_bar_splitter=0x7f080009;
         /**  Sign-in Button Colors 
          */
@@ -410,8 +421,8 @@ containing a value of this type.
         public static final int common_signin_btn_light_text_disabled=0x7f080006;
         public static final int common_signin_btn_light_text_focused=0x7f080007;
         public static final int common_signin_btn_light_text_pressed=0x7f080005;
-        public static final int common_signin_btn_text_dark=0x7f080017;
-        public static final int common_signin_btn_text_light=0x7f080018;
+        public static final int common_signin_btn_text_dark=0x7f080022;
+        public static final int common_signin_btn_text_light=0x7f080023;
         public static final int wallet_bright_foreground_disabled_holo_light=0x7f08000f;
         /** 
          Wallet colors to support consistent Wallet fragment holo dark UI in client application
@@ -430,8 +441,8 @@ containing a value of this type.
         public static final int wallet_hint_foreground_holo_light=0x7f080011;
         public static final int wallet_holo_blue_light=0x7f080015;
         public static final int wallet_link_text_light=0x7f080016;
-        public static final int wallet_primary_text_holo_light=0x7f080019;
-        public static final int wallet_secondary_text_holo_dark=0x7f08001a;
+        public static final int wallet_primary_text_holo_light=0x7f080024;
+        public static final int wallet_secondary_text_holo_dark=0x7f080025;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -445,73 +456,80 @@ containing a value of this type.
         public static final int activity_vertical_margin=0x7f0b0001;
     }
     public static final class drawable {
-        public static final int add_btn=0x7f020000;
-        public static final int add_member=0x7f020001;
-        public static final int cast_ic_notification_0=0x7f020002;
-        public static final int cast_ic_notification_1=0x7f020003;
-        public static final int cast_ic_notification_2=0x7f020004;
-        public static final int cast_ic_notification_connecting=0x7f020005;
-        public static final int cast_ic_notification_on=0x7f020006;
-        public static final int common_full_open_on_phone=0x7f020007;
-        public static final int common_ic_googleplayservices=0x7f020008;
-        public static final int common_signin_btn_icon_dark=0x7f020009;
-        public static final int common_signin_btn_icon_disabled_dark=0x7f02000a;
-        public static final int common_signin_btn_icon_disabled_focus_dark=0x7f02000b;
-        public static final int common_signin_btn_icon_disabled_focus_light=0x7f02000c;
-        public static final int common_signin_btn_icon_disabled_light=0x7f02000d;
-        public static final int common_signin_btn_icon_focus_dark=0x7f02000e;
-        public static final int common_signin_btn_icon_focus_light=0x7f02000f;
-        public static final int common_signin_btn_icon_light=0x7f020010;
-        public static final int common_signin_btn_icon_normal_dark=0x7f020011;
-        public static final int common_signin_btn_icon_normal_light=0x7f020012;
-        public static final int common_signin_btn_icon_pressed_dark=0x7f020013;
-        public static final int common_signin_btn_icon_pressed_light=0x7f020014;
-        public static final int common_signin_btn_text_dark=0x7f020015;
-        public static final int common_signin_btn_text_disabled_dark=0x7f020016;
-        public static final int common_signin_btn_text_disabled_focus_dark=0x7f020017;
-        public static final int common_signin_btn_text_disabled_focus_light=0x7f020018;
-        public static final int common_signin_btn_text_disabled_light=0x7f020019;
-        public static final int common_signin_btn_text_focus_dark=0x7f02001a;
-        public static final int common_signin_btn_text_focus_light=0x7f02001b;
-        public static final int common_signin_btn_text_light=0x7f02001c;
-        public static final int common_signin_btn_text_normal_dark=0x7f02001d;
-        public static final int common_signin_btn_text_normal_light=0x7f02001e;
-        public static final int common_signin_btn_text_pressed_dark=0x7f02001f;
-        public static final int common_signin_btn_text_pressed_light=0x7f020020;
-        public static final int g2=0x7f020021;
-        public static final int groupmenu_addbutton=0x7f020022;
-        public static final int groupmenu_dialog_groupname=0x7f020023;
-        public static final int groupmenu_dialog_invite=0x7f020024;
-        public static final int groupmenu_item=0x7f020025;
-        public static final int groupmenu_shape=0x7f020026;
-        public static final int ic_launcher=0x7f020027;
-        public static final int ic_plusone_medium_off_client=0x7f020028;
-        public static final int ic_plusone_small_off_client=0x7f020029;
-        public static final int ic_plusone_standard_off_client=0x7f02002a;
-        public static final int ic_plusone_tall_off_client=0x7f02002b;
-        public static final int loading_shape=0x7f02002c;
-        public static final int login_shape=0x7f02002d;
-        public static final int manage_dlg_1=0x7f02002e;
-        public static final int manage_dlg_2=0x7f02002f;
-        public static final int manage_dlg_3=0x7f020030;
-        public static final int manage_menu2=0x7f020031;
-        public static final int member_imgv=0x7f020032;
-        public static final int money_dialog_contextv=0x7f020033;
-        public static final int money_dialog_datev=0x7f020034;
-        public static final int money_dialog_imgv=0x7f020035;
-        public static final int money_dialog_minusv=0x7f020036;
-        public static final int money_dialog_plusv=0x7f020037;
-        public static final int next=0x7f020038;
-        public static final int plus_btn=0x7f020039;
-        public static final int plus_btn2=0x7f02003a;
-        public static final int powered_by_google_dark=0x7f02003b;
-        public static final int powered_by_google_light=0x7f02003c;
-        public static final int sendbutton=0x7f02003d;
-        public static final int t_bank=0x7f02003e;
-        public static final int t_num=0x7f02003f;
-        public static final int tab_bank=0x7f020040;
-        public static final int tab_manage=0x7f020041;
-        public static final int tab_member=0x7f020042;
+        public static final int actionbar_tab_indicator=0x7f020000;
+        public static final int actionbar_tab_selected=0x7f020001;
+        public static final int actionbar_tab_selected_focused=0x7f020002;
+        public static final int actionbar_tab_selected_pressed=0x7f020003;
+        public static final int actionbar_tab_unselected=0x7f020004;
+        public static final int actionbar_tab_unselected_focused=0x7f020005;
+        public static final int actionbar_tab_unselected_pressed=0x7f020006;
+        public static final int add_btn=0x7f020007;
+        public static final int add_member=0x7f020008;
+        public static final int cast_ic_notification_0=0x7f020009;
+        public static final int cast_ic_notification_1=0x7f02000a;
+        public static final int cast_ic_notification_2=0x7f02000b;
+        public static final int cast_ic_notification_connecting=0x7f02000c;
+        public static final int cast_ic_notification_on=0x7f02000d;
+        public static final int common_full_open_on_phone=0x7f02000e;
+        public static final int common_ic_googleplayservices=0x7f02000f;
+        public static final int common_signin_btn_icon_dark=0x7f020010;
+        public static final int common_signin_btn_icon_disabled_dark=0x7f020011;
+        public static final int common_signin_btn_icon_disabled_focus_dark=0x7f020012;
+        public static final int common_signin_btn_icon_disabled_focus_light=0x7f020013;
+        public static final int common_signin_btn_icon_disabled_light=0x7f020014;
+        public static final int common_signin_btn_icon_focus_dark=0x7f020015;
+        public static final int common_signin_btn_icon_focus_light=0x7f020016;
+        public static final int common_signin_btn_icon_light=0x7f020017;
+        public static final int common_signin_btn_icon_normal_dark=0x7f020018;
+        public static final int common_signin_btn_icon_normal_light=0x7f020019;
+        public static final int common_signin_btn_icon_pressed_dark=0x7f02001a;
+        public static final int common_signin_btn_icon_pressed_light=0x7f02001b;
+        public static final int common_signin_btn_text_dark=0x7f02001c;
+        public static final int common_signin_btn_text_disabled_dark=0x7f02001d;
+        public static final int common_signin_btn_text_disabled_focus_dark=0x7f02001e;
+        public static final int common_signin_btn_text_disabled_focus_light=0x7f02001f;
+        public static final int common_signin_btn_text_disabled_light=0x7f020020;
+        public static final int common_signin_btn_text_focus_dark=0x7f020021;
+        public static final int common_signin_btn_text_focus_light=0x7f020022;
+        public static final int common_signin_btn_text_light=0x7f020023;
+        public static final int common_signin_btn_text_normal_dark=0x7f020024;
+        public static final int common_signin_btn_text_normal_light=0x7f020025;
+        public static final int common_signin_btn_text_pressed_dark=0x7f020026;
+        public static final int common_signin_btn_text_pressed_light=0x7f020027;
+        public static final int g2=0x7f020028;
+        public static final int groupmenu_addbutton=0x7f020029;
+        public static final int groupmenu_dialog_groupname=0x7f02002a;
+        public static final int groupmenu_dialog_invite=0x7f02002b;
+        public static final int groupmenu_item=0x7f02002c;
+        public static final int groupmenu_shape=0x7f02002d;
+        public static final int ic_launcher=0x7f02002e;
+        public static final int ic_plusone_medium_off_client=0x7f02002f;
+        public static final int ic_plusone_small_off_client=0x7f020030;
+        public static final int ic_plusone_standard_off_client=0x7f020031;
+        public static final int ic_plusone_tall_off_client=0x7f020032;
+        public static final int loading_shape=0x7f020033;
+        public static final int login_shape=0x7f020034;
+        public static final int manage_dlg_1=0x7f020035;
+        public static final int manage_dlg_2=0x7f020036;
+        public static final int manage_dlg_3=0x7f020037;
+        public static final int manage_menu2=0x7f020038;
+        public static final int member_imgv=0x7f020039;
+        public static final int money_dialog_contextv=0x7f02003a;
+        public static final int money_dialog_datev=0x7f02003b;
+        public static final int money_dialog_imgv=0x7f02003c;
+        public static final int money_dialog_minusv=0x7f02003d;
+        public static final int money_dialog_plusv=0x7f02003e;
+        public static final int next=0x7f02003f;
+        public static final int plus_btn=0x7f020040;
+        public static final int plus_btn2=0x7f020041;
+        public static final int powered_by_google_dark=0x7f020042;
+        public static final int powered_by_google_light=0x7f020043;
+        public static final int sendbutton=0x7f020044;
+        public static final int t_bank=0x7f020045;
+        public static final int t_num=0x7f020046;
+        public static final int tab_bank=0x7f020047;
+        public static final int tab_manage=0x7f020048;
+        public static final int tab_member=0x7f020049;
     }
     public static final class id {
         public static final int action_settings=0x7f070050;
@@ -770,10 +788,6 @@ containing a value of this type.
     }
     public static final class style {
         /** 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    
-
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
@@ -792,9 +806,27 @@ containing a value of this type.
          */
         public static final int AppBaseTheme=0x7f050005;
         /**  Application theme. 
+         */
+        public static final int AppIntro=0x7f050008;
+        public static final int AppMain=0x7f050009;
+        public static final int AppNoActionBar=0x7f050006;
+        /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f050006;
+        public static final int AppTheme=0x7f050007;
+        /**  Styling the Action Bar : Use an Android Themes for Application or Activity 
+         */
+        public static final int CustomActionBarTheme=0x7f05000a;
+        /**  Styling the Action Bar : title text style 
+         */
+        public static final int MyActionBar=0x7f05000b;
+        /**  Styling the Action Bar : tabs text color 
+         */
+        public static final int MyActionBarTabText=0x7f05000e;
+        public static final int MyActionBarTabs=0x7f05000c;
+        /**  Styling the Action Bar : title text color 
+         */
+        public static final int MyActionBarTitleText=0x7f05000d;
         public static final int Theme_IAPTheme=0x7f050000;
         public static final int WalletFragmentDefaultButtonTextAppearance=0x7f050003;
         public static final int WalletFragmentDefaultDetailsHeaderTextAppearance=0x7f050002;
