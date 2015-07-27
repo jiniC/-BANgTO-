@@ -45,10 +45,10 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
          }
       });
       
-      actionBar.addTab(actionBar.newTab().setText("멤버").setTabListener(this));
-      actionBar.addTab(actionBar.newTab().setText("주고받기").setTabListener(this));
-      actionBar.addTab(actionBar.newTab().setText("가계부").setTabListener(this));
-      actionBar.addTab(actionBar.newTab().setText("채팅").setTabListener(this));
+      actionBar.addTab(actionBar.newTab().setIcon(R.drawable.t_member3).setTabListener(this));
+      actionBar.addTab(actionBar.newTab().setIcon(R.drawable.t_bank2).setTabListener(this));
+      actionBar.addTab(actionBar.newTab().setIcon(R.drawable.t_money).setTabListener(this));
+      actionBar.addTab(actionBar.newTab().setIcon(R.drawable.t_chat).setTabListener(this));
       
       ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#d70000"));
       actionBar.setStackedBackgroundDrawable(colorDrawable);
