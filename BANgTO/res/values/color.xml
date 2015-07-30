@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bgcolor_intro">#ffffff</color>
+    <color name="actionbar_background">#000000</color>
+    <color name="actionbar_menu_text">#000000</color>
+    <color name="actionbar_title_text">#000000</color>
+    <color name="actionbar_tab_text">#000000</color>
+    <color name="bgcolor_tab_unselected">#ffffff</color>
+    <color name="bgcolor_tab_selected">#ffffff</color>
+    <color name="bgcolor_tab_unselected_focused">#ffffff</color>
+    <color name="bgcolor_tab_selected_focused">#ffffff</color>
+    <color name="bgcolor_tab_unselected_pressed">#ffffff</color>
+    <color name="bgcolor_tab_selected_pressedd">#ffffff</color>
+</resources>

@@ -20,7 +20,11 @@
             android:id="@+id/member_imgv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+<<<<<<< HEAD
             android:src="@drawable/member_imgv3" />
+=======
+            android:src="@drawable/member_menu" />
+>>>>>>> 351ea8820d57ffc1737bd618125377fce6d4ff77
     </LinearLayout>
 
     <RelativeLayout

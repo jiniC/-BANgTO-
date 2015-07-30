@@ -42,7 +42,7 @@ public class PersonalInfoActivity extends Activity  {
          @Override
          public void onClick(View arg0) {
             // TODO Auto-generated method stub
-            Intent intent = new Intent(getApplicationContext(), TabMainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), GroupMenuActivity.class);
             startActivity(intent);
             
          }
