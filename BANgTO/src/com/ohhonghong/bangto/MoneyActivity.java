@@ -36,7 +36,7 @@ public class MoneyActivity extends Fragment {
 	View moneyview;
 
 	SQLiteDatabase sqlDB1,sqlDB2;
-	myDBHelper myHelper;
+	myDBHelper myHelper; 
 
 	String year, month, day, allday;
 	String valueplus, valueminus, valueall, contents;

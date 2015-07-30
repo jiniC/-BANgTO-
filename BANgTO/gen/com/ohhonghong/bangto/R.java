@@ -495,7 +495,7 @@ containing a value of this type.
         public static final int manage_dlg_2=0x7f02002f;
         public static final int manage_dlg_3=0x7f020030;
         public static final int manage_menu2=0x7f020031;
-        public static final int member_imgv=0x7f020032;
+        public static final int member_imgv3=0x7f020032;
         public static final int money_dialog_contextv=0x7f020033;
         public static final int money_dialog_datev=0x7f020034;
         public static final int money_dialog_imgv=0x7f020035;
