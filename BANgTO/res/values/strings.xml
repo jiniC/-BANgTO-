@@ -4,7 +4,7 @@
     <string name="app_name">BANgTO</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">채팅</string>
-    <string name="action_deep_link">        com.google.android.gms.samples.appinvite.DEEP_LINK_ACTION</string>
+    <string name="action_deep_link">com.google.android.gms.samples.appinvite.DEEP_LINK_ACTION</string>
     <string name="invite">Send invitations!</string>
     <string name="welcome">App Invite\nQuickstart</string>
     <string name="referrer_hint">Deep link not provided</string>

@@ -36,7 +36,7 @@ public class GroupMenuActivity extends Activity {
 	private GroupAdapter mAdapter = null;
 	View dlgview;
 	ImageButton groupAddButton;
-	EditText etGroupName;
+	EditText etGroupName,etMemberName;
 
 	Typeface childFont;
 	
@@ -103,13 +103,22 @@ public class GroupMenuActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				/*
+				
 				dlgview = (View) View.inflate(GroupMenuActivity.this, R.layout.groupmenu_add_dialog, null);
 				AlertDialog.Builder dlg = new AlertDialog.Builder(GroupMenuActivity.this);
 
 				dlg.setView(dlgview);
 				etGroupName = (EditText) dlgview.findViewById(R.id.etGroupName);
-
+				etMemberName = (EditText) dlgview.findViewById(R.id.etMemberName);
+				etMemberName.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View arg0) {
+						// TODO Auto-generated method stub
+						onInviteClicked();
+					}
+				});
+				
 				// 입력된 내용을 받아드리겠다. (확인 버튼)
 				dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
@@ -124,8 +133,8 @@ public class GroupMenuActivity extends Activity {
 					}
 				});
 				dlg.show();
-				*/
-				onInviteClicked();
+				
+				
 			}
 			
 			

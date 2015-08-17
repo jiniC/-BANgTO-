@@ -19,7 +19,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/manage_menu2" />
+            android:src="@drawable/manage_menu3" />
 
     </LinearLayout>
 
