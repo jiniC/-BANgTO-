@@ -1,12 +1,16 @@
 package com.ohhonghong.bangto;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.ohhonghong.bangto.MoneyActivity.myDBHelper;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -84,6 +88,13 @@ public class BankActivity extends Fragment {
 						String from = etFrom.getText().toString();
 						String money = etMoney.getText().toString();
 						mAdapter.addItem(to, from, money);
+						
+			 			   
+						 Calendar calendar = Calendar.getInstance();
+						 int sec = calendar.get(Calendar.MINUTE);
+						  
+						 Timer timer = new Timer();
+					     timer.schedule(timerTask,sec+60000);  
 					}
 				});
 
@@ -181,4 +192,13 @@ public class BankActivity extends Fragment {
 		}
 
 	}
+	
+	TimerTask timerTask = new TimerTask() {
+		@Override
+		public void run() {
+			
+			Intent i = new Intent(getActivity(), NotificationBuilder.class);
+			startActivity(i);
+		}        
+	};	
 }

@@ -259,7 +259,8 @@ int layout money_item 0x7f030011
 int layout personal_info 0x7f030012
 int layout tab 0x7f030013
 int menu main 0x7f0c0000
-int raw gtm_analytics 0x7f040000
+int raw android 0x7f040000
+int raw gtm_analytics 0x7f040001
 int string accept 0x7f060002
 int string action_settings 0x7f06002e
 int string app_name 0x7f06002c
