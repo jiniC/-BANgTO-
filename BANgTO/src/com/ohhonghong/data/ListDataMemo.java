@@ -1,4 +1,4 @@
-package com.ohhonghong.bangto;
+package com.ohhonghong.data;
 
 public class ListDataMemo {
 	public byte type = 0;

@@ -2,6 +2,8 @@ package com.ohhonghong.bangto;
 
 import java.util.ArrayList;
 
+import com.ohhonghong.data.ListDataMember;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;

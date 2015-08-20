@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.appinvite.AppInviteReferral;
+import com.ohhonghong.data.ListDataGroup;
+import com.ohhonghong.invite.DeepLinkActivity;
 
 import android.app.ActionBar;
 import android.app.Activity;

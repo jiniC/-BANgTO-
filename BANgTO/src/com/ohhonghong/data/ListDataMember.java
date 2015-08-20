@@ -1,4 +1,4 @@
-package com.ohhonghong.bangto;
+package com.ohhonghong.data;
 
 public class ListDataMember {
 	// ¿Ã∏ß

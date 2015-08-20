@@ -14,12 +14,16 @@
  * limitations under the License.
  */
 
-package com.ohhonghong.bangto;
+package com.ohhonghong.invite;
 
 import com.google.android.gms.appinvite.AppInvite;
 import com.google.android.gms.appinvite.AppInviteReferral;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.ohhonghong.bangto.R;
+import com.ohhonghong.bangto.R.id;
+import com.ohhonghong.bangto.R.layout;
+import com.ohhonghong.bangto.R.string;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -156,7 +160,6 @@ public class DeepLinkActivity extends Activity implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_ok:
-            	
                 finish();
                 break;
         }

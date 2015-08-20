@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package com.ohhonghong.bangto;
+package com.ohhonghong.invite;
 
 import com.google.android.gms.appinvite.AppInviteReferral;
+import com.ohhonghong.bangto.R;
+import com.ohhonghong.bangto.R.string;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
