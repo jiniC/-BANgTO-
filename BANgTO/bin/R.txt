@@ -270,9 +270,14 @@ int raw gtm_analytics 0x7f040001
 int string accept 0x7f060002
 int string action_deep_link 0x7f06002f
 int string action_settings 0x7f06002e
+int string alert_title_question 0x7f060042
 int string app_name 0x7f06002c
 int string auth_google_play_services_client_facebook_display_name 0x7f060007
 int string auth_google_play_services_client_google_display_name 0x7f060006
+int string button_add 0x7f06003e
+int string button_no 0x7f060041
+int string button_ok 0x7f06003f
+int string button_yes 0x7f060040
 int string cast_notification_connected_message 0x7f060009
 int string cast_notification_connecting_message 0x7f060008
 int string cast_notification_disconnect 0x7f06000a

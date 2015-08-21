@@ -20,4 +20,13 @@
     <string name="send_failed">Sending invitations failed</string>
     <string name="invite_dialog_title">You got an invitation!</string>
 
+    <string name="button_add">추가</string>
+    <string name="button_ok">확인</string>
+    <string name="button_yes">예</string>
+    <string name="button_no">아니오</string>
+    <string name="alert_title_question">BANgTO 그룹 삭제</string>
+    
 </resources>
+
+
+   

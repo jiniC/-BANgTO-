@@ -38,6 +38,7 @@ public class GroupMenuActivity extends Activity {
 	private GroupAdapter mAdapter = null;
 	View dlgview;
 	ImageButton groupAddButton;
+	private ArrayList<ListDataGroup> mListData = new ArrayList<ListDataGroup>();
 	EditText etGroupName,etMemberName;
 
 	Typeface childFont;
@@ -100,6 +101,7 @@ public class GroupMenuActivity extends Activity {
 			}
 		});
 
+		mListView.setOnItemLongClickListener(new ListViewItemLongClickListener());
 		groupAddButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -149,7 +151,7 @@ public class GroupMenuActivity extends Activity {
 
 	class GroupAdapter extends BaseAdapter {
 		private Context mContext = null;
-		private ArrayList<ListDataGroup> mListData = new ArrayList<ListDataGroup>();
+		
 
 		public GroupAdapter(Context mContext) {
 			super();
@@ -317,4 +319,46 @@ public class GroupMenuActivity extends Activity {
 	        startActivity(newIntent);
 	    }
 	    // [END register_unregister_launch]
+	    
+	    //롱클릭시 그룹삭제
+	    int selectedPos = -1;
+	    private class ListViewItemLongClickListener implements AdapterView.OnItemLongClickListener
+	    {
+	        @Override
+	        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) 
+	        {
+	            selectedPos = position;
+	            AlertDialog.Builder alertDlg = new AlertDialog.Builder(view.getContext());
+	            alertDlg.setTitle(R.string.alert_title_question);
+
+	            // '예' 버튼이 클릭되면
+	            alertDlg.setPositiveButton( R.string.button_yes, new DialogInterface.OnClickListener()
+	            {
+	                 @Override
+	                 public void onClick( DialogInterface dialog, int which ) 
+	                 {
+	                	 mListData.remove(selectedPos);
+	                     
+	                     // 아래 method를 호출하지 않을 경우, 삭제된 item이 화면에 계속 보여진다.
+	                     mAdapter.notifyDataSetChanged();                     
+	                     dialog.dismiss();  // AlertDialog를 닫는다.
+	                 }
+	            });
+	            
+	            // '아니오' 버튼이 클릭되면
+	            alertDlg.setNegativeButton( R.string.button_no, new DialogInterface.OnClickListener()
+	            {
+	                 @Override
+	                 public void onClick( DialogInterface dialog, int which ) {
+	                     dialog.dismiss();  // AlertDialog를 닫는다.
+	                 }
+	            });
+	            
+	            
+	            alertDlg.setMessage("그룹을 삭제하시겠습니까?");
+	            alertDlg.show();
+	            return false;
+	        }
+	     
+	    }
 }
