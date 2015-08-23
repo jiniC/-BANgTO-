@@ -100,7 +100,7 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
    @Override
    public void onConnectionSuspended(int cause) {
       // TODO Auto-generated method stub
-
+	   mPlusClient.connect();
    }
 
    @Override

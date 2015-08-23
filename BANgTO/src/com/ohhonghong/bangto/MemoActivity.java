@@ -48,7 +48,7 @@ public class MemoActivity extends Fragment {
 		super.onCreate(savedInstanceState);
 		View view = inflater.inflate(R.layout.memo, null);
 		
-		ArrayList<ListDataMemo> data_list = new ArrayList<ListDataMemo>();
+		final ArrayList<ListDataMemo> data_list = new ArrayList<ListDataMemo>();
 
 		m_adapter = new MemoAdapter(data_list);
 
@@ -75,6 +75,8 @@ public class MemoActivity extends Fragment {
 				m_adapter.add(data);
 				
 				m_list.smoothScrollToPosition(m_adapter.getCount() - 1);
+				
+				data_list.add(data);
 			}
 		});
 		

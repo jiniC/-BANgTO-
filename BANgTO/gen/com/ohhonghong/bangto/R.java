@@ -661,6 +661,7 @@ containing a value of this type.
         public static final int accept=0x7f060002;
         public static final int action_deep_link=0x7f06002f;
         public static final int action_settings=0x7f06002e;
+        public static final int alert_title_question=0x7f060042;
         public static final int app_name=0x7f06002c;
         /**  Brand name for Facebook [DO NOT TRANSLATE] 
          */
@@ -668,6 +669,10 @@ containing a value of this type.
         /**  Brand name for Google [DO NOT TRANSLATE] 
          */
         public static final int auth_google_play_services_client_google_display_name=0x7f060006;
+        public static final int button_add=0x7f06003e;
+        public static final int button_no=0x7f060041;
+        public static final int button_ok=0x7f06003f;
+        public static final int button_yes=0x7f060040;
         /**  Message of the notification to indicate an active cast display connection.  [CHAR LIMIT=80] NOTE: Same text as msgid="794424023757290105" 
          */
         public static final int cast_notification_connected_message=0x7f060009;
