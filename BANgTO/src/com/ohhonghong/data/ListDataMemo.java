@@ -2,15 +2,18 @@ package com.ohhonghong.data;
 
 public class ListDataMemo {
 	public byte type = 0;
-    public String data1 = null;
-    public String data2 = null;
-    
-    public ListDataMemo(byte parm_type, String parm_data1, String parm_data2)
-    {
-        type = parm_type;
-        data1 = parm_data1;
-        data2 = parm_data2;
-    }
+
+	public String date;
+	public String data1 = null; // username
+	public String data2 = null; // memo
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 
 	public byte getType() {
 		return type;
@@ -35,5 +38,5 @@ public class ListDataMemo {
 	public void setData2(String data2) {
 		this.data2 = data2;
 	}
-    
+
 }
