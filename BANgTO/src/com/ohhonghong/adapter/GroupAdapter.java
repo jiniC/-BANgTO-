@@ -23,7 +23,7 @@ public class GroupAdapter extends BaseAdapter{
 		infalter = (LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
 		
 	}
-	
+
 	public int getCount() {
 		return lst.size();
 	}
@@ -52,5 +52,6 @@ public class GroupAdapter extends BaseAdapter{
 		
 		return view;
 	}
+
 	
 }
