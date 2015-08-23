@@ -1,6 +1,20 @@
 package com.ohhonghong.bangto;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.appinvite.AppInviteReferral;
@@ -23,10 +37,12 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -61,11 +77,14 @@ public class GroupMenuActivity extends Activity {
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.hide();
-		
+
 		groupAddButton = (ImageButton) findViewById(R.id.groupAddButton);
-	
+
 		mListView = (ListView) findViewById(R.id.listview);
 		mAdapter = new GroupAdapter(this);
+		/*
+		mAdapter.notifyDataSetInvalidated();
+		mAdapter.notifyDataSetChanged() ;*/
 		mListView.setAdapter(mAdapter);
 		conntectCheck();
 
@@ -132,8 +151,49 @@ public class GroupMenuActivity extends Activity {
 				// 입력된 내용을 받아드리겠다. (확인 버튼)
 				dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						String groupName = etGroupName.getText().toString();
-						// mAdapter.addItem(groupName);
+						final String groupName = etGroupName.getText().toString();
+
+						Thread thread = new Thread() {
+							@Override
+							public void run() {
+								HttpClient httpClient = new DefaultHttpClient();
+								String urlString = "http://119.205.252.231:8080/BANgToServer/insert_group.jsp";
+								String TAG = "ing";
+								try {
+									URI url = new URI(urlString);
+
+									HttpPost httpPost = new HttpPost();
+									httpPost.setURI(url);
+
+									List<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>(2);
+									nameValuePairs.add(new BasicNameValuePair("groupName", groupName));
+									nameValuePairs.add(new BasicNameValuePair("member", "test"));
+
+									httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+									HttpResponse response = httpClient.execute(httpPost);
+									String responseString = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
+
+									Log.d(TAG, responseString);
+								} catch (URISyntaxException e) {
+									Log.e(TAG, e.getLocalizedMessage());
+									e.printStackTrace();
+								} catch (ClientProtocolException e) {
+									Log.e(TAG, e.getLocalizedMessage());
+									e.printStackTrace();
+								} catch (IOException e) {
+									Log.e(TAG, e.getLocalizedMessage());
+									e.printStackTrace();
+								}
+
+							}
+						};
+						
+						thread.start();
+						/*
+						mAdapter.notifyDataSetChanged() ;
+						mAdapter.notifyDataSetInvalidated();
+						*/
 					}
 				});
 
@@ -148,6 +208,8 @@ public class GroupMenuActivity extends Activity {
 
 		});
 	}
+
+	/**/
 
 	// 웹에서 데이터를 가져오기 전에 먼저 네트워크 상태부터 확인
 	public void conntectCheck() {
@@ -273,50 +335,44 @@ public class GroupMenuActivity extends Activity {
 		startActivity(newIntent);
 	}
 	// [END register_unregister_launch]
-	
-	
-	//////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////
-	    
-	    //롱클릭시 그룹삭제
-	    int selectedPos = -1;
-	    private class ListViewItemLongClickListener implements AdapterView.OnItemLongClickListener
-	    {
-	        @Override
-	        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) 
-	        {
-	            selectedPos = position;
-	            AlertDialog.Builder alertDlg = new AlertDialog.Builder(view.getContext());
-	            alertDlg.setTitle(R.string.alert_title_question);
 
-	            // '예' 버튼이 클릭되면
-	            alertDlg.setPositiveButton( R.string.button_yes, new DialogInterface.OnClickListener()
-	            {
-	                 @Override
-	                 public void onClick( DialogInterface dialog, int which ) 
-	                 {
-	                	 mListData.remove(selectedPos);
-	                     
-	                     // 아래 method를 호출하지 않을 경우, 삭제된 item이 화면에 계속 보여진다.
-	                     mAdapter.notifyDataSetChanged();                     
-	                     dialog.dismiss();  // AlertDialog를 닫는다.
-	                 }
-	            });
-	            
-	            // '아니오' 버튼이 클릭되면
-	            alertDlg.setNegativeButton( R.string.button_no, new DialogInterface.OnClickListener()
-	            {
-	                 @Override
-	                 public void onClick( DialogInterface dialog, int which ) {
-	                     dialog.dismiss();  // AlertDialog를 닫는다.
-	                 }
-	            });
-	            
-	            
-	            alertDlg.setMessage("그룹을 삭제하시겠습니까?");
-	            alertDlg.show();
-	            return false;
-	        }
-	     
-	    }
+	//////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////
+
+	// 롱클릭시 그룹삭제
+	int selectedPos = -1;
+
+	private class ListViewItemLongClickListener implements AdapterView.OnItemLongClickListener {
+		@Override
+		public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+			selectedPos = position;
+			AlertDialog.Builder alertDlg = new AlertDialog.Builder(view.getContext());
+			alertDlg.setTitle(R.string.alert_title_question);
+
+			// '예' 버튼이 클릭되면
+			alertDlg.setPositiveButton(R.string.button_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					mListData.remove(selectedPos);
+
+					// 아래 method를 호출하지 않을 경우, 삭제된 item이 화면에 계속 보여진다.
+					mAdapter.notifyDataSetChanged();
+					dialog.dismiss(); // AlertDialog를 닫는다.
+				}
+			});
+
+			// '아니오' 버튼이 클릭되면
+			alertDlg.setNegativeButton(R.string.button_no, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss(); // AlertDialog를 닫는다.
+				}
+			});
+
+			alertDlg.setMessage("그룹을 삭제하시겠습니까?");
+			alertDlg.show();
+			return false;
+		}
+
+	}
 }
