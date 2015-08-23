@@ -43,9 +43,11 @@ public class BankActivity extends Fragment {
 	EditText etTo, etFrom, etMoney;
 
 	Context mContext;
-
-	public BankActivity(Context context) {
+	public String group;
+	
+	public BankActivity(Context context,String group) {
 		mContext = context;
+		this.group = group;
 	}
 
 	@Override

@@ -6,17 +6,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.ohhonghong.bangto.GroupMenuActivity;
-import com.ohhonghong.bangto.MainActivity;
 import com.ohhonghong.bangto.MemberActivity;
-import com.ohhonghong.data.ListDataGroup;
 import com.ohhonghong.data.ListDataMember;
 
 import android.app.ProgressDialog;
-import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Toast;
 
 /*
  * Params - 비동기 작업시 필요한 데이터 자료형
@@ -37,7 +32,8 @@ public class MemberAsyncTask extends AsyncTask<String, Integer, String> {
 
 	public MemberAsyncTask(MemberActivity context) {
 		this.context = context;
-		load = new LoadManager("select_bank_info");
+		
+		load = new LoadManager("select_bank_info",context.group);
 	}
 
 	// 백그라운드 작업 수행전에 해야할 업무등을 이 메서드에 작성하며 되는데,

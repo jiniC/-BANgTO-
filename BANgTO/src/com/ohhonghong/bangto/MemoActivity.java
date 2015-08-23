@@ -44,9 +44,11 @@ public class MemoActivity extends Fragment {
 	TextView message;
 	
 	Context mContext;
+	public String group;
 
-	public MemoActivity(Context context) {
+	public MemoActivity(Context context,String group) {
 		mContext = context;
+		this.group = group;
 	}
 
 	

@@ -116,9 +116,12 @@ public class GroupMenuActivity extends Activity {
 				// extras.putString("title", data.getTitle());
 				// extras.putString("description", data.getDescription());
 				// extras.putInt("color", data.getColor());
-
+				//String groupName = mListData.get(position).groupName;
+				//Log.i( mListData.get(position).groupName, "hyunhye");
+				
 				Intent intent = new Intent(getApplicationContext(), TabMainActivity.class);
-
+				intent.putExtra("group","OhHongHong");
+				
 				// 위에서 만든 Bundle을 인텐트에 넣는다.
 				// intent.putExtras(extras);
 				// 액티비티를 생성한다.

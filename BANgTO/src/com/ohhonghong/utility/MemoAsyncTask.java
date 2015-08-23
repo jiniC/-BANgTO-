@@ -38,7 +38,7 @@ public class MemoAsyncTask extends AsyncTask<String, Integer, String> {
 
 	public MemoAsyncTask(MemoActivity context) {
 		this.context = context;
-		load = new LoadManager("select_memo");
+		load = new LoadManager("select_memo",context.group);
 	}
 
 	// 백그라운드 작업 수행전에 해야할 업무등을 이 메서드에 작성하며 되는데,

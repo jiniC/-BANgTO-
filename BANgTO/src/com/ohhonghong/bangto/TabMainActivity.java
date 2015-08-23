@@ -20,6 +20,7 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
 
    SectionsPagerAdapter mSectionsPagerAdapter;
    ViewPager mViewPager;
+   String group;
 
    
    @Override
@@ -54,6 +55,8 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
       actionBar.setStackedBackgroundDrawable(colorDrawable);
       
       //mTabs.add(new SamplePagerItem(getString(R.string.tab_stream),Color.BLUE,Color.GRAY));
+      Intent intent = getIntent();
+      group = intent.getStringExtra("group");
       
    }
 
@@ -72,13 +75,13 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
          // below) with the page number as its lone argument.
          switch (position) {
          case 0:
-            return new MemberActivity(mContext);
+            return new MemberActivity(mContext,group);
          case 1:
-            return new BankActivity(mContext);
+            return new BankActivity(mContext,group);
          case 2:
-            return new MoneyActivity(mContext);
+            return new MoneyActivity(mContext,group);
          case 3:
-        	 return new MemoActivity(mContext);
+            return new MemoActivity(mContext,group);
          }
          return null;
       }
@@ -109,23 +112,23 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
    
    /*
    @Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+   public boolean onCreateOptionsMenu(Menu menu) {
+      // Inflate the menu; this adds items to the action bar if it is present.
+      getMenuInflater().inflate(R.menu.main, menu);
+      return true;
+   }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			Intent intent = new Intent(getApplicationContext(), MemoActivity.class);
-			startActivity(intent);
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}*/
+   @Override
+   public boolean onOptionsItemSelected(MenuItem item) {
+      // Handle action bar item clicks here. The action bar will
+      // automatically handle clicks on the Home/Up button, so long
+      // as you specify a parent activity in AndroidManifest.xml.
+      int id = item.getItemId();
+      if (id == R.id.action_settings) {
+         Intent intent = new Intent(getApplicationContext(), MemoActivity.class);
+         startActivity(intent);
+         return true;
+      }
+      return super.onOptionsItemSelected(item);
+   }*/
 }

@@ -35,7 +35,7 @@ public class GroupAsyncTask extends AsyncTask<String, Integer, String> {
 
 	public GroupAsyncTask(Context context) {
 		this.context = (GroupMenuActivity) context;
-		load = new LoadManager("select");
+		load = new LoadManager("select","OhHongHong");
 		
 
 	}

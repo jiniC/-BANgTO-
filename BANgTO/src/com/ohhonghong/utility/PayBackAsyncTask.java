@@ -39,7 +39,7 @@ public class PayBackAsyncTask extends AsyncTask<String, Integer, String> {
 
 	public PayBackAsyncTask(BankActivity context) {
 		this.context = context;
-		load = new LoadManager("select_payback");
+		load = new LoadManager("select_payback",context.group);
 	}
 
 	// 백그라운드 작업 수행전에 해야할 업무등을 이 메서드에 작성하며 되는데,

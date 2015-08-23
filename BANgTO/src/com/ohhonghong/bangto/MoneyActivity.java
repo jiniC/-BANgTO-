@@ -54,9 +54,11 @@ public class MoneyActivity extends Fragment {
 	String sum;
 	int valueallsum = 0;
 	Context mContext;
+	public String group;
 
-	public MoneyActivity(Context context) {
+	public MoneyActivity(Context context,String group) {
 		mContext = context;
+		this.group = group;
 	}
 
 	@Override

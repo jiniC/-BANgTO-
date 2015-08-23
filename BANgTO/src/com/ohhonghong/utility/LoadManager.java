@@ -14,10 +14,13 @@ public class LoadManager {
 	BufferedReader buffer=null;
 
 	//필요한 객체 초기화
-	public LoadManager(String jsp) {
+	public LoadManager(String jsp,String group) {
 		try {
-			url = new URL("http://119.205.252.231:8080/BANgToServer/"+jsp+".jsp");
+			url = new URL("http://119.205.252.231:8080/BANgToServer/"+jsp+".jsp?groupName='"+group+"'");
 			conn = (HttpURLConnection)url.openConnection();
+			
+/*			conn.setRequestMethod("GET");
+			conn.setRequestProperty("groupName", group);*/
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

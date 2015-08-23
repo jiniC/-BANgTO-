@@ -25,9 +25,11 @@ public class MemberActivity extends Fragment {
 	ImageButton add_member_btn;
 
 	public Context mContext;
+	public String group;
 
-	public MemberActivity(Context context) {
+	public MemberActivity(Context context,String group) {
 		mContext = context;
+		this.group = group;
 	}
 
 	@Override
