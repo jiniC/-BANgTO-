@@ -1,8 +1,11 @@
 package com.ohhonghong.bangto;
 
+import java.util.ArrayList;
+
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.appinvite.AppInviteReferral;
 import com.ohhonghong.adapter.GroupAdapter;
+import com.ohhonghong.data.ListDataGroup;
 import com.ohhonghong.invite.DeepLinkActivity;
 import com.ohhonghong.utility.MyAsyncTask;
 
@@ -39,12 +42,8 @@ public class GroupMenuActivity extends Activity {
 	// private GroupAdapter mAdapter = null;
 	View dlgview;
 	ImageButton groupAddButton;
-<<<<<<< HEAD
 	EditText etGroupName, etMemberName;
-=======
 	private ArrayList<ListDataGroup> mListData = new ArrayList<ListDataGroup>();
-	EditText etGroupName,etMemberName;
->>>>>>> 75909a57ce0d17e08bad2eb747182fe70f8c02ec
 
 	Typeface childFont;
 
@@ -155,15 +154,9 @@ public class GroupMenuActivity extends Activity {
 		ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-<<<<<<< HEAD
 		if (networkInfo != null && networkInfo.isConnected()) {
 			// fetch data
 			// Toast.makeText(this,"네트워크 연결중입니다.", Toast.LENGTH_SHORT).show();
-=======
-	class GroupAdapter extends BaseAdapter {
-		private Context mContext = null;
-		
->>>>>>> 75909a57ce0d17e08bad2eb747182fe70f8c02ec
 
 			task = new MyAsyncTask(this);
 			task.execute("");
@@ -279,111 +272,11 @@ public class GroupMenuActivity extends Activity {
 		Intent newIntent = new Intent(intent).setClass(this, DeepLinkActivity.class);
 		startActivity(newIntent);
 	}
-<<<<<<< HEAD
 	// [END register_unregister_launch]
-=======
 	
 	
 	//////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////
-	 @Override
-	    protected void onStart() {
-	        super.onStart();
-	        registerDeepLinkReceiver();
-	    }
-
-	    @Override
-	    protected void onStop() {
-	        super.onStop();
-	        unregisterDeepLinkReceiver();
-	    }
-	    
-	    /**
-	     * User has clicked the 'Invite' button, launch the invitation UI with the proper
-	     * title, message, and deep link
-	     */
-	    // [START on_invite_clicked]
-	    private void onInviteClicked() {
-	        Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
-	                .setMessage(getString(R.string.invitation_message))
-	                .setDeepLink(Uri.parse(getString(R.string.invitation_deep_link)))
-	                .build();
-	        startActivityForResult(intent, REQUEST_INVITE);
-	    }
-	    // [END on_invite_clicked]
-
-	    // [START on_activity_result]
-	    @Override
-	    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	        super.onActivityResult(requestCode, resultCode, data);
-	        //Log.d(TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
-
-	        if (requestCode == REQUEST_INVITE) {
-	            if (resultCode == RESULT_OK) {
-	                // Check how many invitations were sent and log a message
-	                // The ids array contains the unique invitation ids for each invitation sent
-	                // (one for each contact select by the user). You can use these for analytics
-	                // as the ID will be consistent on the sending and receiving devices.
-	                String[] ids = AppInviteInvitation.getInvitationIds(resultCode, data);
-	                //Log.d(TAG, getString(R.string.sent_invitations_fmt, ids.length));
-	            } else {
-	                // Sending failed or it was canceled, show failure message to the user
-	                //showMessage(getString(R.string.send_failed));
-	            	Toast.makeText(getApplicationContext(),"failed..", Toast.LENGTH_LONG);
-	            }
-	        }
-	    }
-	    // [END on_activity_result]
-
-	    /*
-	    private void showMessage(String msg) {
-	        ViewGroup container = (ViewGroup) findViewById(R.id.snackbar_layout);
-	        Snackbar.make(container, msg, Snackbar.LENGTH_SHORT).show();
-	    }
-*/
-	   
-	    /**
-	     * There are two broadcast receivers in this application.  The first is ReferrerReceiver, it
-	     * is a global receiver declared in the manifest.  It receives broadcasts from the Play Store
-	     * and then broadcasts messages to the local broadcast receiver, which is registered here.
-	     * Since the broadcast is asynchronous, it can occur after the app has started, so register
-	     * for the notification immediately in onStart. The Play Store broadcast should be very soon
-	     * after the app is first opened, so this receiver should trigger soon after start
-	     */
-	    // [START register_unregister_launch]
-	    private void registerDeepLinkReceiver() {
-	        // Create local Broadcast receiver that starts DeepLinkActivity when a deep link
-	        // is found
-	        mDeepLinkReceiver = new BroadcastReceiver() {
-	            @Override
-	            public void onReceive(Context context, Intent intent) {
-	                if (AppInviteReferral.hasReferral(intent)) {
-	                    launchDeepLinkActivity(intent);
-	                }
-	            }
-	        };
-
-	        IntentFilter intentFilter = new IntentFilter(getString(R.string.action_deep_link));
-	        LocalBroadcastManager.getInstance(this).registerReceiver(
-	                mDeepLinkReceiver, intentFilter);
-	    }
-
-	    private void unregisterDeepLinkReceiver() {
-	        if (mDeepLinkReceiver != null) {
-	            LocalBroadcastManager.getInstance(this).unregisterReceiver(mDeepLinkReceiver);
-	        }
-	    }
-
-	    /**
-	     * Launch DeepLinkActivity with an intent containing App Invite information
-	     */
-	    
-	    private void launchDeepLinkActivity(Intent intent) {
-	        //Log.d(TAG, "launchDeepLinkActivity:" + intent);
-	        Intent newIntent = new Intent(intent).setClass(this, DeepLinkActivity.class);
-	        startActivity(newIntent);
-	    }
-	    // [END register_unregister_launch]
 	    
 	    //롱클릭시 그룹삭제
 	    int selectedPos = -1;
@@ -426,5 +319,4 @@ public class GroupMenuActivity extends Activity {
 	        }
 	     
 	    }
->>>>>>> 75909a57ce0d17e08bad2eb747182fe70f8c02ec
 }
