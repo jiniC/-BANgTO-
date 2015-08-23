@@ -32,8 +32,6 @@ public class MemoAsyncTask extends AsyncTask<String, Integer, String> {
 
 	LoadManager load;// 접속과 요청을 담당하는 객체 선언
 	
-	private SimpleDateFormat m_date_format = null;
-	private SimpleDateFormat m_time_format = null;
 	
 
 	public MemoAsyncTask(MemoActivity context) {
@@ -78,9 +76,7 @@ public class MemoAsyncTask extends AsyncTask<String, Integer, String> {
 		// 어댑터가 보유한 ArrayList를 갱신시켜주자!
 		ArrayList<ListDataMemo> dataList = context.mAdapter.lst;
 		dataList.removeAll(dataList);
-		m_date_format = new SimpleDateFormat("yyyy/MM/dd", Locale.KOREA);
-		m_time_format = new SimpleDateFormat("HH:mm:ss", Locale.KOREA);
-		;
+	
 		
 		try {
 			JSONObject o = new JSONObject(result);
@@ -93,7 +89,7 @@ public class MemoAsyncTask extends AsyncTask<String, Integer, String> {
 				obj = array.getJSONObject(n);
 				dataVo = new ListDataMemo();
 
-				dataVo.setDate(m_date_format.format(new Date()));
+				dataVo.setDate(obj.getString("date"));
 				dataVo.setData1(obj.getString("who"));
 				dataVo.setData2(obj.getString("memo"));
 				

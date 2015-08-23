@@ -46,6 +46,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class GroupMenuActivity extends Activity {
@@ -60,7 +61,7 @@ public class GroupMenuActivity extends Activity {
 	ImageButton groupAddButton;
 	EditText etGroupName, etMemberName;
 	private ArrayList<ListDataGroup> mListData = new ArrayList<ListDataGroup>();
-
+	
 	Typeface childFont;
 
 	private static final int REQUEST_INVITE = 0;
@@ -119,8 +120,11 @@ public class GroupMenuActivity extends Activity {
 				//String groupName = mListData.get(position).groupName;
 				//Log.i( mListData.get(position).groupName, "hyunhye");
 				
+				//ListData m = data.get(position);
+				TextView GroupName = (TextView)view.findViewById(R.id.tvGroupName);
+				
 				Intent intent = new Intent(getApplicationContext(), TabMainActivity.class);
-				intent.putExtra("group","OhHongHong");
+				intent.putExtra("group",GroupName.getText());
 				
 				// 위에서 만든 Bundle을 인텐트에 넣는다.
 				// intent.putExtras(extras);
