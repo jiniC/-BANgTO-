@@ -2,7 +2,11 @@ package com.ohhonghong.bangto;
 
 import java.util.ArrayList;
 
+import com.ohhonghong.adapter.PayBackAdapter;
+import com.ohhonghong.adapter.PayBookAdapter;
 import com.ohhonghong.data.ListDataMoney;
+import com.ohhonghong.utility.PayBackAsyncTask;
+import com.ohhonghong.utility.PayBookAsyncTask;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -10,6 +14,8 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -27,18 +33,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MoneyActivity extends Fragment {
-	ListView money_list;
+	
+	
+	public PayBookAsyncTask task;
+	public ListView mListView;
+	public PayBookAdapter mAdapter;
+	
 	ImageButton plus_btn;
 	ImageView money_imgv;
 	DatePicker money_dlg_dp;
 	EditText money_dlg_edt1, money_dlg_edt2;
 	RadioButton money_dlg_radio_btn_in, money_dlg_radio_btn_out;
 
-	GroupAdapter groupadapter;
 	View moneyview;
 
-	SQLiteDatabase sqlDB1,sqlDB2;
-	myDBHelper myHelper; 
 
 	String year, month, day, allday;
 	String valueplus, valueminus, valueall, contents;
@@ -56,7 +64,6 @@ public class MoneyActivity extends Fragment {
 		super.onCreate(savedInstanceState);
 		View view = inflater.inflate(R.layout.money, null);
 
-		money_list = (ListView) view.findViewById(R.id.money_list);
 		plus_btn = (ImageButton) view.findViewById(R.id.plus_btn);
 		money_imgv = (ImageView) view.findViewById(R.id.money_imgv);
 		money_dlg_dp = (DatePicker) view.findViewById(R.id.money_dlg_dp);
@@ -65,26 +72,10 @@ public class MoneyActivity extends Fragment {
 		money_dlg_radio_btn_in = (RadioButton) view.findViewById(R.id.money_dlg_radio_btn_in);
 		money_dlg_radio_btn_out = (RadioButton) view.findViewById(R.id.money_dlg_radio_btn_out);
 
-		myHelper = new myDBHelper(getActivity());
-		groupadapter = new GroupAdapter(getActivity());
-		money_list.setAdapter(groupadapter);
-		
-		sqlDB1 = myHelper.getReadableDatabase();
-		Cursor cursor; // db의 결과를 받을 수 있는 클래스(cursor)
-		cursor = sqlDB1.rawQuery("select * from moneyTBL;", null);
-		while(cursor.moveToNext()){
-			if(cursor.isFirst()){ continue;}
-			dbdate = cursor.getString(0); 
-			dbvalueplus = cursor.getString(1); 
-			dbvalueminus = cursor.getString(2);
-			dbvalueall =  cursor.getString(3);
-			dbcontents = cursor.getString(4); 
-			
-			groupadapter.addItem(dbdate, dbvalueplus, dbvalueminus, dbvalueall, dbcontents);
-			
-		}
-		cursor.close();
-		sqlDB1.close();
+		mListView = (ListView) view.findViewById(R.id.money_list);
+		mAdapter = new PayBookAdapter(getActivity());
+		mListView.setAdapter(mAdapter);
+		conntectCheck();
 		
 		plus_btn.setOnClickListener(new View.OnClickListener() {
 
@@ -121,14 +112,7 @@ public class MoneyActivity extends Fragment {
 							valueminus = money_dlg_edt2.getText().toString();
 						}
 						
-						sqlDB2 = myHelper.getReadableDatabase();
-						Cursor cursor; // db의 결과를 받을 수 있는 클래스(cursor)
-						cursor = sqlDB2.rawQuery("select * from moneyTBL;", null);
-						while(cursor.moveToNext()){
-							sum =  cursor.getString(3).toString();
-						}
-						cursor.close();
-						sqlDB2.close();
+						
 						
 						int a =  Integer.parseInt(sum);
 						int b = Integer.parseInt(valueplus);
@@ -145,12 +129,7 @@ public class MoneyActivity extends Fragment {
 								.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 
-								sqlDB1 = myHelper.getWritableDatabase();
-
-								sqlDB1.execSQL("insert into moneyTBL VALUES ('" + allday + "', '" + valueplus + "', '"
-										+ valueminus + "', '" + valueall + "', '" + contents + "');");
-								groupadapter.addItem(allday, valueplus, valueminus, valueall, contents);
-								sqlDB1.close();
+								
 								// Toast.makeText(
 								// mContext, "가계부가 저장되었습니다 :)", 0) .show();
 							}
@@ -185,118 +164,26 @@ public class MoneyActivity extends Fragment {
 		return view;
 	}
 
-	class ViewHolder {
-		// 날짜
-		public TextView money_data;
-		// 내용
-		public TextView money_content;
-		// +
-		public TextView money_plus;
-		// -
-		public TextView money_minus;
-		// 잔액
-		public TextView money_balance;
-	}
+	// 웹에서 데이터를 가져오기 전에 먼저 네트워크 상태부터 확인
+		public void conntectCheck() {
+			ConnectivityManager connMgr = (ConnectivityManager) getActivity()
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-	class GroupAdapter extends BaseAdapter {
-		private Context mContext = null;
-		private ArrayList<ListDataMoney> mListData = new ArrayList<ListDataMoney>();
+			if (networkInfo != null && networkInfo.isConnected()) {
+				// fetch data
+				// Toast.makeText(this,"네트워크 연결중입니다.", Toast.LENGTH_SHORT).show();
 
-		public GroupAdapter(Context mContext) {
-			super();
-			this.mContext = mContext;
-		}
+				task = new PayBookAsyncTask(MoneyActivity.this);
+				task.execute("");
 
-		@Override
-		public int getCount() {
-			return mListData.size();
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return mListData.get(position);
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHolder holder;
-			if (convertView == null) {
-				holder = new ViewHolder();
-
-				LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				convertView = inflater.inflate(R.layout.money_item, null);
-
-				holder.money_data = (TextView) convertView.findViewById(R.id.money_data);
-				holder.money_plus = (TextView) convertView.findViewById(R.id.money_plus);
-				holder.money_minus = (TextView) convertView.findViewById(R.id.money_minus);
-				holder.money_balance = (TextView) convertView.findViewById(R.id.money_balance);
-				holder.money_content = (TextView) convertView.findViewById(R.id.money_content);
-
-				convertView.setTag(holder);
 			} else {
-				holder = (ViewHolder) convertView.getTag();
+				// display error
+				Toast.makeText(getActivity(), "네트워크 상태를 확인하십시오", Toast.LENGTH_SHORT).show();
 			}
-
-			ListDataMoney mData = mListData.get(position);
-
-			holder.money_data.setText(mData.money_data);
-			holder.money_plus.setText(mData.money_plus);
-			holder.money_minus.setText(mData.money_minus);
-			holder.money_balance.setText(mData.money_balance);
-			holder.money_content.setText(mData.money_content);
-
-			return convertView;
 		}
-
-		public void addItem(String tvGroupdata, String tvGroupplus, String tvGroupminus, String tvGroupbalance,
-				String tvGroupcontext) {
-			ListDataMoney addInfo = null;
-			addInfo = new ListDataMoney();
-
-			addInfo.money_data = tvGroupdata;
-			addInfo.money_plus = tvGroupplus;
-			addInfo.money_minus = tvGroupminus;
-			addInfo.money_balance = tvGroupbalance;
-			addInfo.money_content = tvGroupcontext;
-
-			mListData.add(addInfo);
-		}
-
-		public void remove(int position) {
-			mListData.remove(position);
-			dataChange();
-		}
-
-		public void dataChange() {
-			groupadapter.notifyDataSetChanged();
-		}
-
-	}
-
-	public class myDBHelper extends SQLiteOpenHelper {
-		public myDBHelper(Context moneyActivity) {
-			super(moneyActivity, "MoneyDB", null, 1);
-		}
-
-		@Override
-		public void onCreate(SQLiteDatabase db) {
-			// TODO Auto-generated method stub
-			db.execSQL("create table moneyTBL (date CHAR(50), plusmoney CHAR(50), minusmoney CHAR(50), allmoney CHAR(70),contents CHAR(100));");
-			db.execSQL("insert into moneyTBL VALUES ('0000/0/0','0','0','0','-')");
-		}
-
-		@Override
-		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-			// TODO Auto-generated method stub
-			db.execSQL("drop table if exists moneyTBL;"); // 이미 그룹테이블이 있으면 지운다.
-			onCreate(db); // 새로운 테이블을 만듦
-		}
-	}
+		
+	
 
 	// 라디오 버튼을 선택했을 때
 	public void onCheckedChanged(RadioGroup arg0, int arg1) {

@@ -7,7 +7,7 @@ import com.google.android.gms.appinvite.AppInviteReferral;
 import com.ohhonghong.adapter.GroupAdapter;
 import com.ohhonghong.data.ListDataGroup;
 import com.ohhonghong.invite.DeepLinkActivity;
-import com.ohhonghong.utility.MyAsyncTask;
+import com.ohhonghong.utility.GroupAsyncTask;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -34,7 +34,7 @@ import android.widget.Toast;
 
 public class GroupMenuActivity extends Activity {
 
-	public MyAsyncTask task;
+	public GroupAsyncTask task;
 	public ListView mListView;
 	public GroupAdapter mAdapter;
 
@@ -158,7 +158,7 @@ public class GroupMenuActivity extends Activity {
 			// fetch data
 			// Toast.makeText(this,"네트워크 연결중입니다.", Toast.LENGTH_SHORT).show();
 
-			task = new MyAsyncTask(this);
+			task = new GroupAsyncTask(this);
 			task.execute("");
 
 		} else {

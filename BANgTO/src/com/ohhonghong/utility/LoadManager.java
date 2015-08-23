@@ -14,9 +14,9 @@ public class LoadManager {
 	BufferedReader buffer=null;
 
 	//필요한 객체 초기화
-	public LoadManager() {
+	public LoadManager(String jsp) {
 		try {
-			url = new URL("http://119.205.252.231:8080/BANgToServer/select.jsp");
+			url = new URL("http://119.205.252.231:8080/BANgToServer/"+jsp+".jsp");
 			conn = (HttpURLConnection)url.openConnection();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();

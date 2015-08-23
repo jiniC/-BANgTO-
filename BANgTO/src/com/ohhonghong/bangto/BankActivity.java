@@ -5,15 +5,20 @@ import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.ohhonghong.bangto.MoneyActivity.myDBHelper;
+import com.ohhonghong.adapter.MemberAdapter;
+import com.ohhonghong.adapter.PayBackAdapter;
 import com.ohhonghong.data.ListDataBank;
 import com.ohhonghong.notification.NotificationBuilder;
+import com.ohhonghong.utility.MemberAsyncTask;
+import com.ohhonghong.utility.PayBackAsyncTask;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -25,48 +30,33 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BankActivity extends Fragment {
-	public ListView mListView = null;
-	public CustomAdapter mAdapter = null;
+
+	public PayBackAsyncTask task;
+	public ListView mListView;
+	public PayBackAdapter mAdapter;
+
 	ImageButton ib_manage_add;
 	View dlgview;
 	EditText etTo, etFrom, etMoney;
-	
+
 	Context mContext;
-	
-	SQLiteDatabase sqlDB1,sqlDB2;
-	myDBHelper myHelper;
-	
+
 	public BankActivity(Context context) {
 		mContext = context;
 	}
-	
+
 	@Override
-	public View  onCreateView(LayoutInflater inflater, 
-			ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		View view = inflater.inflate(R.layout.bank, null);
-		
-		mListView = (ListView) view.findViewById(R.id.listview);
-		mAdapter = new CustomAdapter(mContext);
-		mListView.setAdapter(mAdapter);
 
-		mAdapter.addItem("신현혜", "최서진", "1000원");
-		mAdapter.addItem("신현혜", "최서진", "2500원");
-		mAdapter.addItem("신현혜", "최서진", "1000원");
-		mAdapter.addItem("신현혜", "최서진", "3000원");
-		mAdapter.addItem("신현혜", "최서진", "5000원");
-		mAdapter.addItem("신현혜", "최서진", "21000원");
-		mAdapter.addItem("신현혜", "최서진", "1000원");
-		mAdapter.addItem("최서진", "신현혜", "1000원");
-		mAdapter.addItem("최서진", "신현혜", "1000원");
-		mAdapter.addItem("최서진", "신현혜", "2000원");
-		mAdapter.addItem("최서진", "신현혜", "15000원");
-		mAdapter.addItem("최서진", "신현혜", "1000원");
-		mAdapter.addItem("최서진", "신현혜", "10000원");
-		mAdapter.addItem("신현혜", "최서진", "1000원");
-		mAdapter.addItem("신현혜", "최서진", "1000원");
+		mListView = (ListView) view.findViewById(R.id.listview);
+		mAdapter = new PayBackAdapter(getActivity());
+		mListView.setAdapter(mAdapter);
+		conntectCheck();
 
 		ib_manage_add = (ImageButton) view.findViewById(R.id.ib_manage_add);
 
@@ -89,14 +79,13 @@ public class BankActivity extends Fragment {
 						String to = etTo.getText().toString();
 						String from = etFrom.getText().toString();
 						String money = etMoney.getText().toString();
-						mAdapter.addItem(to, from, money);
-						
-			 			   
-						 Calendar calendar = Calendar.getInstance();
-						 int sec = calendar.get(Calendar.MINUTE);
-						  
-						 Timer timer = new Timer();
-					     timer.schedule(timerTask,sec+60000);  
+						//mAdapter.addItem(to, from, money);
+
+						Calendar calendar = Calendar.getInstance();
+						int sec = calendar.get(Calendar.MINUTE);
+
+						Timer timer = new Timer();
+						timer.schedule(timerTask, sec + 60000);
 					}
 				});
 
@@ -111,96 +100,31 @@ public class BankActivity extends Fragment {
 		return view;
 	}
 
-	class ViewHolder {
-		public TextView mTo;
+	// 웹에서 데이터를 가져오기 전에 먼저 네트워크 상태부터 확인
+	public void conntectCheck() {
+		ConnectivityManager connMgr = (ConnectivityManager) getActivity()
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-		public TextView mFrom;
+		if (networkInfo != null && networkInfo.isConnected()) {
+			// fetch data
+			// Toast.makeText(this,"네트워크 연결중입니다.", Toast.LENGTH_SHORT).show();
 
-		public TextView mMoney;
+			task = new PayBackAsyncTask(BankActivity.this);
+			task.execute("");
+
+		} else {
+			// display error
+			Toast.makeText(getActivity(), "네트워크 상태를 확인하십시오", Toast.LENGTH_SHORT).show();
+		}
 	}
 
-	class CustomAdapter extends BaseAdapter {
-		private Context mContext = null;
-		private ArrayList<ListDataBank> mListData = new ArrayList<ListDataBank>();
-
-		public CustomAdapter(Context mContext) {
-			super();
-			this.mContext = mContext;
-		}
-
-		@Override
-		public int getCount() {
-			return mListData.size();
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return mListData.get(position);
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		public void addItem(String tvTo, String tvFrom, String tvMoney) {
-			ListDataBank addInfo = null;
-			addInfo = new ListDataBank();
-			addInfo.tvTo = tvTo;
-			addInfo.tvFrom = tvFrom;
-			addInfo.tvMoney = tvMoney;
-
-			mListData.add(addInfo);
-		}
-
-		public void remove(int position) {
-			mListData.remove(position);
-			dataChange();
-		}
-
-		/*
-		 * public void sort() { Collections.sort(mListData,
-		 * ListDataManage.ALPHA_COMPARATOR); dataChange(); }
-		 */
-		public void dataChange() {
-			mAdapter.notifyDataSetChanged();
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHolder holder;
-			if (convertView == null) {
-				holder = new ViewHolder();
-
-				LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				convertView = inflater.inflate(R.layout.bank_item, null);
-
-				holder.mTo = (TextView) convertView.findViewById(R.id.tvTo);
-				holder.mFrom = (TextView) convertView.findViewById(R.id.tvFrom);
-				holder.mMoney = (TextView) convertView.findViewById(R.id.tvMoney);
-
-				convertView.setTag(holder);
-			} else {
-				holder = (ViewHolder) convertView.getTag();
-			}
-
-			ListDataBank mData = mListData.get(position);
-
-			holder.mTo.setText(mData.tvTo);
-			holder.mFrom.setText(mData.tvFrom);
-			holder.mMoney.setText(mData.tvMoney);
-
-			return convertView;
-		}
-
-	}
-	
 	TimerTask timerTask = new TimerTask() {
 		@Override
 		public void run() {
-			
+
 			Intent i = new Intent(getActivity(), NotificationBuilder.class);
 			startActivity(i);
-		}        
-	};	
+		}
+	};
 }

@@ -6,9 +6,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.ohhonghong.bangto.BankActivity;
 import com.ohhonghong.bangto.GroupMenuActivity;
 import com.ohhonghong.bangto.MainActivity;
+import com.ohhonghong.bangto.MemberActivity;
+import com.ohhonghong.bangto.MoneyActivity;
+import com.ohhonghong.data.ListDataBank;
 import com.ohhonghong.data.ListDataGroup;
+import com.ohhonghong.data.ListDataMember;
+import com.ohhonghong.data.ListDataMoney;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -26,19 +32,16 @@ import android.widget.Toast;
  * Result - 웹서버로부터 가져오게 될 데이터에 알맞는 자료형을 개발자가 결정
  * 			주로 JSON, XML등을 가져오게 되므로 String을 많이 사용한다.
  */
-public class MyAsyncTask extends AsyncTask<String, Integer, String> {
+public class PayBookAsyncTask extends AsyncTask<String, Integer, String> {
 
-	GroupMenuActivity context;
+	MoneyActivity context;
 	ProgressDialog dialog;
 
 	LoadManager load;// 접속과 요청을 담당하는 객체 선언
 
-	public MyAsyncTask(Context context) {
-		this.context = (GroupMenuActivity) context;
-
-		load = new LoadManager();
-		
-
+	public PayBookAsyncTask(MoneyActivity context) {
+		this.context = context;
+		load = new LoadManager("select_paybook");
 	}
 
 	// 백그라운드 작업 수행전에 해야할 업무등을 이 메서드에 작성하며 되는데,
@@ -47,7 +50,7 @@ public class MyAsyncTask extends AsyncTask<String, Integer, String> {
 	protected void onPreExecute() {
 		super.onPreExecute();
 
-		dialog = new ProgressDialog(context);
+		dialog = new ProgressDialog(context.getActivity());
 		// dialog.setCancelable(false);
 		dialog.show();
 	}
@@ -73,26 +76,30 @@ public class MyAsyncTask extends AsyncTask<String, Integer, String> {
 		int n = 0;
 		dialog.dismiss();
 		//Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
-		System.out.println("Group");
+		System.out.println("PayBook");
 		// 최종적으로 웹서버로부터 데이터를 완전히 가져온 시점은 이 메서드이므로,
 		// 어댑터가 보유한 ArrayList를 갱신시켜주자!
-		ArrayList<ListDataGroup> dataList = context.mAdapter.lst;
+		ArrayList<ListDataMoney> dataList = context.mAdapter.lst;
 		dataList.removeAll(dataList);
 		
 		try {
 			JSONObject o = new JSONObject(result);
 			//JSONArray array = new JSONArray(result);
-			JSONArray array = o.getJSONArray("Group");
-			ListDataGroup dataVo = null;
+			JSONArray array = o.getJSONArray("PayBook");
+			ListDataMoney dataVo = null;
 			JSONObject obj = null;
 			System.out.println("1");
 			for (int i = 0; i < array.length(); i++) {
 				obj = array.getJSONObject(n);
-				dataVo = new ListDataGroup();
+				dataVo = new ListDataMoney();
 
-				System.out.println("2obj.getString(name):" + obj.getString("groupName"));
-				dataVo.setGroupName(obj.getString("groupName"));
-				Log.i("hye4", "conn");
+				//System.out.println("2obj.getString(name):" + obj.getString("email"));
+				dataVo.setMoney_data(obj.getString("date"));
+				dataVo.setMoney_plus(obj.getString("plus"));
+				dataVo.setMoney_minus(obj.getString("minus"));
+				dataVo.setMoney_balance(obj.getString("balance"));
+				dataVo.setMoney_content(obj.getString("content"));
+				
 				dataList.add(dataVo);
 
 				context.mListView.invalidateViews();

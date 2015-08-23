@@ -4,16 +4,26 @@ import java.text.Collator;
 import java.util.Comparator;
 
 public class ListDataBank {
-   public String tvTo;
+   public String getTvTo() {
+		return tvTo;
+	}
+	public void setTvTo(String tvTo) {
+		this.tvTo = tvTo;
+	}
+	public String getTvFrom() {
+		return tvFrom;
+	}
+	public void setTvFrom(String tvFrom) {
+		this.tvFrom = tvFrom;
+	}
+	public String getTvMoney() {
+		return tvMoney;
+	}
+	public void setTvMoney(String tvMoney) {
+		this.tvMoney = tvMoney;
+	}
+public String tvTo;
    public String tvFrom;
    public String tvMoney;
-   /*
-   public static final Comparator<ListDataManage> ALPHA_COMPARATOR = new Comparator<ListDataManage>() {
-      final Collator sCollator = Collator.getInstance();
-      @Override
-      public int compare(ListDataManage lhs, ListDataManage rhs) {
-         // TODO Auto-generated method stub
-         return sCollator.compare(lhs.tvTo, rhs.tvTo);
-      }
-   };*/
+
 }
