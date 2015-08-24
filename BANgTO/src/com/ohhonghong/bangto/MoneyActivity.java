@@ -16,18 +16,14 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
-import com.ohhonghong.adapter.PayBackAdapter;
 import com.ohhonghong.adapter.PayBookAdapter;
 import com.ohhonghong.data.ListDataMoney;
-import com.ohhonghong.utility.PayBackAsyncTask;
 import com.ohhonghong.utility.PayBookAsyncTask;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -36,15 +32,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MoneyActivity extends Fragment {
@@ -68,6 +61,12 @@ public class MoneyActivity extends Fragment {
 	int valueallsum = 0;
 	Context mContext;
 	public String group;
+	
+	SharedPreferences pref;
+	SharedPreferences.Editor editor;
+	int i = 0;
+
+
 
 	public MoneyActivity(Context context, String group) {
 		mContext = context;
@@ -86,7 +85,11 @@ public class MoneyActivity extends Fragment {
 		money_dlg_edt2 = (EditText) view.findViewById(R.id.money_dlg_edt2);
 		money_dlg_radio_btn_in = (RadioButton) view.findViewById(R.id.money_dlg_radio_btn_in);
 		money_dlg_radio_btn_out = (RadioButton) view.findViewById(R.id.money_dlg_radio_btn_out);
-
+		
+		
+		pref = mContext.getSharedPreferences("pref", mContext.MODE_PRIVATE);
+		i = pref.getInt("i", 0);
+		
 		mListView = (ListView) view.findViewById(R.id.money_list);
 		mAdapter = new PayBookAdapter(getActivity());
 		mListView.setAdapter(mAdapter);
@@ -114,9 +117,9 @@ public class MoneyActivity extends Fragment {
 						money_dlg_edt2 = (EditText) moneyview.findViewById(R.id.money_dlg_edt2);
 
 						year = Integer.toString(money_dlg_dp.getYear());
-						month = Integer.toString(money_dlg_dp.getMonth() + 1);
-						day = Integer.toString(money_dlg_dp.getDayOfMonth());
-						allday = year + "/" + month + "/" + day;
+						month = Integer.toString(money_dlg_dp.getMonth() + 1); if(month.length() == 1) month = 0 + month;
+						day = Integer.toString(money_dlg_dp.getDayOfMonth()); if(day.length() == 1) day = 0 + day;
+						allday = year + "" + month + "" + day;  
 						contents = money_dlg_edt1.getText().toString();
 
 						if (money_dlg_radio_btn_in.isChecked()) {
@@ -127,11 +130,17 @@ public class MoneyActivity extends Fragment {
 							valueminus = money_dlg_edt2.getText().toString();
 						}
 
-						int a = Integer.parseInt(sum);
-						int b = Integer.parseInt(valueplus);
-						int c = Integer.parseInt(valueminus);
-						valueallsum = a + b - c + 0;
-						valueall = Integer.toString(valueallsum);
+						int balance = 0;
+						if(mListView.getCount() == 0){
+							balance = Integer.parseInt(valueplus) -Integer.parseInt(valueminus) + 0;
+							valueall = Integer.toString(balance);
+						}else{
+							/*현재 잔고*/
+							//money_balance = (TextView) mListView.findViewById(R.id.money_balance);
+							//balance = Integer.parseInt(money_balance.toString())+Integer.parseInt(valueplus) -Integer.parseInt(valueminus) + 0;
+							balance = Integer.parseInt(((ListDataMoney) mListView.getItemAtPosition(i)).getMoney_balance())+Integer.parseInt(valueplus) -Integer.parseInt(valueminus) + 0;
+							valueall = Integer.toString(balance);
+						}
 
 						/*
 						 * AlertDialog.Builder alertDialogBuilder = new
@@ -174,7 +183,7 @@ public class MoneyActivity extends Fragment {
 									nameValuePairs.add(new BasicNameValuePair("date", allday));
 									nameValuePairs.add(new BasicNameValuePair("plus", valueplus));
 									nameValuePairs.add(new BasicNameValuePair("minus", valueminus));
-									nameValuePairs.add(new BasicNameValuePair("balance", "1000"));
+									nameValuePairs.add(new BasicNameValuePair("balance", valueall));
 									nameValuePairs.add(new BasicNameValuePair("content", contents));
 
 									httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -259,4 +268,20 @@ public class MoneyActivity extends Fragment {
 			break;
 		}
 	}
+	
+	public void onStop() {
+		// 어플리케이션이 화면에서 사라질때
+		super.onStop();
+		SharedPreferences pref = mContext.getSharedPreferences("pref",mContext.MODE_PRIVATE);
+		// UI 상태를 저장합니다.
+		editor = pref.edit();
+		// Editor를 불러옵니다.
+		
+		// 저장할 값들을 입력합니다.
+		editor.putInt("i", ++i);
+
+		editor.commit();
+		// 저장합니다.
+	}
+
 }
