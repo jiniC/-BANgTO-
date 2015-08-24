@@ -541,7 +541,8 @@ containing a value of this type.
         public static final int tab_member=0x7f020052;
     }
     public static final class id {
-        public static final int action_settings=0x7f07004f;
+        public static final int account=0x7f07004b;
+        public static final int action_settings=0x7f07004e;
         public static final int adjust_height=0x7f070001;
         public static final int adjust_width=0x7f070002;
         public static final int book_now=0x7f070012;
@@ -554,7 +555,6 @@ containing a value of this type.
         public static final int deep_link_text=0x7f070023;
         public static final int dismissable_container=0x7f07001a;
         public static final int donate_with_google=0x7f070015;
-        public static final int editText1=0x7f07004c;
         public static final int etFrom=0x7f07001e;
         public static final int etGroupName=0x7f070028;
         public static final int etMemberName=0x7f07002a;
@@ -565,11 +565,10 @@ containing a value of this type.
         public static final int holo_dark=0x7f070008;
         public static final int holo_light=0x7f070009;
         public static final int hybrid=0x7f070004;
-        public static final int ibNext=0x7f07004d;
+        public static final int ibNext=0x7f07004c;
         public static final int ib_manage_add=0x7f07001c;
         public static final int imageView1=0x7f070027;
         public static final int imageView2=0x7f070029;
-        public static final int imageView3=0x7f07004b;
         public static final int invitation_id_text=0x7f070024;
         public static final int linearLayout1=0x7f070033;
         public static final int listview=0x7f07001b;
@@ -598,7 +597,7 @@ containing a value of this type.
         public static final int monochrome=0x7f070018;
         public static final int none=0x7f070003;
         public static final int normal=0x7f070005;
-        public static final int pager=0x7f07004e;
+        public static final int pager=0x7f07004d;
         public static final int plus_btn=0x7f07003b;
         public static final int production=0x7f07000a;
         public static final int sandbox=0x7f07000b;
@@ -607,7 +606,7 @@ containing a value of this type.
         public static final int sendbutton=0x7f070035;
         public static final int sign_in_button=0x7f07002c;
         public static final int slide=0x7f070019;
-        public static final int spinner1=0x7f07004a;
+        public static final int spinner=0x7f07004a;
         public static final int strict_sandbox=0x7f07000c;
         public static final int terrain=0x7f070007;
         public static final int test=0x7f07000d;
