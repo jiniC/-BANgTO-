@@ -203,6 +203,7 @@ public class GroupMenuActivity extends Activity {
 						mAdapter.notifyDataSetChanged() ;
 						mAdapter.notifyDataSetInvalidated();
 						*/
+						conntectCheck();
 					}
 				});
 
@@ -407,6 +408,7 @@ public class GroupMenuActivity extends Activity {
 					// 아래 method를 호출하지 않을 경우, 삭제된 item이 화면에 계속 보여진다.
 					mAdapter.notifyDataSetChanged();
 					dialog.dismiss(); // AlertDialog를 닫는다.
+					conntectCheck();
 				}
 			});
 

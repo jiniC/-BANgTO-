@@ -39,6 +39,12 @@ public class PersonalInfoActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		Intent i = getIntent();
+		userName = i.getStringExtra("userName");
+		email = i.getStringExtra("email");
+		
+		
 		setContentView(R.layout.personal_info);
 		ibNext = (ImageButton) findViewById(R.id.ibNext);
 		bankspinner = (Spinner) findViewById(R.id.spinner);
@@ -76,9 +82,6 @@ public class PersonalInfoActivity extends Activity {
 
 				acc = account.getText().toString();
 				
-				Intent i = getIntent();
-				userName = i.getStringExtra("userName");
-				email = i.getStringExtra("email");
 				Thread thread = new Thread() {
 					@Override
 					public void run() {
