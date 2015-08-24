@@ -91,7 +91,7 @@ public class MemoAsyncTask extends AsyncTask<String, Integer, String> {
 
 				dataVo.setUsername(obj.getString("who"));
 				dataVo.setMemo(obj.getString("memo"));
-				
+				dataVo.setDate(obj.getString("date"));
 				dataList.add(dataVo);
 
 				context.mListView.invalidateViews();

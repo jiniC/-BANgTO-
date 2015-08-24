@@ -53,9 +53,12 @@ public class MemoAdapter extends BaseAdapter{
 		
 		TextView username = (TextView)view.findViewById(R.id.tv_user);
 		TextView memo = (TextView)view.findViewById(R.id.tv_sendmsg);
+		TextView date = (TextView)view.findViewById(R.id.tv_date);
 		ListDataMemo dataVo = (ListDataMemo)lst.get(position);
+		
 		username.setText(dataVo.getUsername());
 		memo.setText(dataVo.getMemo());
+		date.setText(dataVo.getDate());
 		
 		return view;
 	}

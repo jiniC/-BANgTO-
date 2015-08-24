@@ -131,6 +131,7 @@ public class MemoActivity extends Fragment {
 				};
 
 				thread.start();
+				
 				String sendmessage = message.getText().toString();
 				message.setText("");
 				ListDataMemo data = null;
