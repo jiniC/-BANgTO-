@@ -46,6 +46,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class GroupMenuActivity extends Activity {
@@ -59,8 +60,10 @@ public class GroupMenuActivity extends Activity {
 	View dlgview;
 	ImageButton groupAddButton;
 	EditText etGroupName, etMemberName;
+	TextView tvGroup;
+	
 	private ArrayList<ListDataGroup> mListData = new ArrayList<ListDataGroup>();
-
+	
 	Typeface childFont;
 
 	private static final int REQUEST_INVITE = 0;
@@ -119,8 +122,11 @@ public class GroupMenuActivity extends Activity {
 				//String groupName = mListData.get(position).groupName;
 				//Log.i( mListData.get(position).groupName, "hyunhye");
 				
+				//ListData m = data.get(position);
+				TextView GroupName = (TextView)view.findViewById(R.id.tvGroupName);
+				
 				Intent intent = new Intent(getApplicationContext(), TabMainActivity.class);
-				intent.putExtra("group","OhHongHong");
+				intent.putExtra("group",GroupName.getText());
 				
 				// 위에서 만든 Bundle을 인텐트에 넣는다.
 				// intent.putExtras(extras);
@@ -341,22 +347,62 @@ public class GroupMenuActivity extends Activity {
 
 	//////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////
-
-	// 롱클릭시 그룹삭제
-	int selectedPos = -1;
-
+	
+	/*롱클릭시 삭제*/
 	private class ListViewItemLongClickListener implements AdapterView.OnItemLongClickListener {
 		@Override
 		public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-			selectedPos = position;
+			
 			AlertDialog.Builder alertDlg = new AlertDialog.Builder(view.getContext());
 			alertDlg.setTitle(R.string.alert_title_question);
-
+			
+			tvGroup = (TextView)view.findViewById(R.id.tvGroupName);
+			
 			// '예' 버튼이 클릭되면
 			alertDlg.setPositiveButton(R.string.button_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					mListData.remove(selectedPos);
+					
+					//////////////////////////////////////////////////////////////////////////
+					//////////////////////////////////////////////////////////////////////////
+					Thread thread = new Thread() {
+						@Override
+						public void run() {
+							HttpClient httpClient = new DefaultHttpClient();
+							String urlString = "http://119.205.252.231:8080/BANgToServer/delete_group.jsp";
+							String TAG = "ing";
+							try {
+								URI url = new URI(urlString);
+
+								HttpPost httpPost = new HttpPost();
+								httpPost.setURI(url);
+								
+								List<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>(2);
+								nameValuePairs.add(new BasicNameValuePair("groupName", tvGroup.getText().toString()));
+								
+								Log.d(tvGroup.getText().toString(), "hyunhye");
+
+								httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+								HttpResponse response = httpClient.execute(httpPost);
+								String responseString = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
+
+								Log.d(TAG, responseString);
+							} catch (URISyntaxException e) {
+								Log.e(TAG, e.getLocalizedMessage());
+								e.printStackTrace();
+							} catch (ClientProtocolException e) {
+								Log.e(TAG, e.getLocalizedMessage());
+								e.printStackTrace();
+							} catch (IOException e) {
+								Log.e(TAG, e.getLocalizedMessage());
+								e.printStackTrace();
+							}
+
+						}
+					};
+					
+					thread.start();
 
 					// 아래 method를 호출하지 않을 경우, 삭제된 item이 화면에 계속 보여진다.
 					mAdapter.notifyDataSetChanged();
