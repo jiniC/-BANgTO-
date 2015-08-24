@@ -92,7 +92,6 @@ public class PayBackAsyncTask extends AsyncTask<String, Integer, String> {
 				dataVo = new ListDataBank();
 
 				//System.out.println("2obj.getString(name):" + obj.getString("email"));
-				dataVo.setId(obj.getInt("id"));
 				dataVo.setTvTo(obj.getString("to"));
 				dataVo.setTvFrom(obj.getString("from"));
 				dataVo.setTvMoney(obj.getString("howMuch"));

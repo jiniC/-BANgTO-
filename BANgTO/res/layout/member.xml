@@ -49,7 +49,17 @@
             android:layout_height="match_parent"
             android:layout_weight="1" >
         </ListView>
-        
+        <ImageButton
+                android:id="@+id/add_member_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="#00000000"
+                android:layout_margin="10dp"
+                android:src="@drawable/plus_btn3" 
+               >
+            </ImageButton>
     </RelativeLayout>
 
 </LinearLayout>

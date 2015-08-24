@@ -1,23 +1,42 @@
 package com.ohhonghong.data;
 
 public class ListDataMemo {
-	public String username = null; // username
-	public String memo = null; // memo
+	public byte type = 0;
 
-	public String getUsername() {
-		return username;
+	public String date;
+	public String data1 = null; // username
+	public String data2 = null; // memo
+
+	public String getDate() {
+		return date;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setDate(String date) {
+		this.date = date;
 	}
 
-	public String getMemo() {
-		return memo;
+	public byte getType() {
+		return type;
 	}
 
-	public void setMemo(String memo) {
-		this.memo = memo;
+	public void setType(byte type) {
+		this.type = type;
+	}
+
+	public String getData1() {
+		return data1;
+	}
+
+	public void setData1(String data1) {
+		this.data1 = data1;
+	}
+
+	public String getData2() {
+		return data2;
+	}
+
+	public void setData2(String data2) {
+		this.data2 = data2;
 	}
 
 }

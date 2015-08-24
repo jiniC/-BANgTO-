@@ -89,8 +89,9 @@ public class MemoAsyncTask extends AsyncTask<String, Integer, String> {
 				obj = array.getJSONObject(n);
 				dataVo = new ListDataMemo();
 
-				dataVo.setUsername(obj.getString("who"));
-				dataVo.setMemo(obj.getString("memo"));
+				dataVo.setDate(obj.getString("date"));
+				dataVo.setData1(obj.getString("who"));
+				dataVo.setData2(obj.getString("memo"));
 				
 				dataList.add(dataVo);
 
