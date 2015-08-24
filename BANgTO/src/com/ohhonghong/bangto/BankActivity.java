@@ -123,8 +123,8 @@ public class BankActivity extends Fragment {
 									httpPost.setURI(url);
 
 									List<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>(2);
-									nameValuePairs.add(new BasicNameValuePair("id", "test"));
-									nameValuePairs.add(new BasicNameValuePair("groupName", "test"));
+									//nameValuePairs.add(new BasicNameValuePair("id", "test"));
+									nameValuePairs.add(new BasicNameValuePair("groupName", group));
 									nameValuePairs.add(new BasicNameValuePair("from", from));
 									nameValuePairs.add(new BasicNameValuePair("to", to));
 									nameValuePairs.add(new BasicNameValuePair("howMuch", money));

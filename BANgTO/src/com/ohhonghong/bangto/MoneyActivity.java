@@ -169,12 +169,12 @@ public class MoneyActivity extends Fragment {
 									httpPost.setURI(url);
 
 									List<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>(2);
-									nameValuePairs.add(new BasicNameValuePair("id", "test"));
-									nameValuePairs.add(new BasicNameValuePair("groupName", "test"));
+									//nameValuePairs.add(new BasicNameValuePair("id", "test"));
+									nameValuePairs.add(new BasicNameValuePair("groupName", group));
 									nameValuePairs.add(new BasicNameValuePair("date", allday));
 									nameValuePairs.add(new BasicNameValuePair("plus", valueplus));
 									nameValuePairs.add(new BasicNameValuePair("minus", valueminus));
-									nameValuePairs.add(new BasicNameValuePair("balance", valueall));
+									nameValuePairs.add(new BasicNameValuePair("balance", "1000"));
 									nameValuePairs.add(new BasicNameValuePair("content", contents));
 
 									httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
