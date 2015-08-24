@@ -17,7 +17,7 @@
 			 * 연결
 			 */
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BANgTO", "root", "bangto");
+			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BANgTO?useUnicode=true&characterEncoding=UTF8", "root", "bangto");
 
 
 			if (conn == null)
@@ -26,12 +26,13 @@
 			/*
 			 * 삭제
 			 */
-			request.setCharacterEncoding("UTF-8");
+			
+			stmt = conn.createStatement();
+			
 			request.setCharacterEncoding("UTF-8");
 			String group = request.getParameter("groupName");
 			group = new String(group.getBytes("ISO-8859-1"), "UTF-8");
 			
-			stmt = conn.createStatement();
 			String command = String.format("delete from GroupInvite where groupName = '"+group+"';");
 			int rowNum = stmt.executeUpdate(command);
 			if (rowNum < 1)
