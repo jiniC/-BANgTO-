@@ -60,7 +60,8 @@ public class GroupMenuActivity extends Activity {
 	// private GroupAdapter mAdapter = null;
 	View dlgview;
 	ImageButton groupAddButton;
-	EditText etGroupName, etMemberName;
+	EditText etGroupName;
+	TextView etMemberName;
 	TextView tvGroup;
 	
 	private ArrayList<ListDataGroup> mListData = new ArrayList<ListDataGroup>();
@@ -154,7 +155,7 @@ public class GroupMenuActivity extends Activity {
 
 				dlg.setView(dlgview);
 				etGroupName = (EditText) dlgview.findViewById(R.id.etGroupName);
-				etMemberName = (EditText) dlgview.findViewById(R.id.etMemberName);
+				etMemberName = (TextView) dlgview.findViewById(R.id.etMemberName);
 				etMemberName.setOnClickListener(new OnClickListener() {
 
 					@Override
@@ -416,6 +417,10 @@ public class GroupMenuActivity extends Activity {
 					mAdapter.notifyDataSetChanged();
 					dialog.dismiss(); // AlertDialog¸¦ ´Ý´Â´Ù.
 					conntectCheck();
+					
+					 NotificationManager nm = 
+						    	(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+					 nm.cancel(1234);
 				}
 			});
 
