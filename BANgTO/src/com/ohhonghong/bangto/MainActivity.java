@@ -5,6 +5,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -12,6 +13,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -90,9 +92,17 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
    @Override
    public void onConnected(Bundle connectionHint) {
       // TODO Auto-generated method stub
-      // String accountName = mPlusClient.getAccountName();
-      // Toast.makeText(this, accountName + " is connected.",
-      // Toast.LENGTH_LONG).show();
+       //String accountName = mPlusClient.getAccountName();
+       //Toast.makeText(this, accountName + " is connected.",
+       //Toast.LENGTH_LONG).show();
+	   Person currentPerson = Plus.PeopleApi.getCurrentPerson(mPlusClient);
+	   String personName = currentPerson.getDisplayName();
+	   String personPhotoUrl = currentPerson.getImage().getUrl();
+	   String email = Plus.AccountApi.getAccountName(mPlusClient);
+	   Log.d(personName, "personName");
+	   Log.d(personPhotoUrl, "personPhotoUrl");
+	   Log.d(email, "email");
+
       Intent intent = new Intent(this, PersonalInfoActivity.class);
       startActivity(intent);
    }
