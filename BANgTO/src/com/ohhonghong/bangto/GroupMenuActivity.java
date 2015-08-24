@@ -416,6 +416,10 @@ public class GroupMenuActivity extends Activity {
 					mAdapter.notifyDataSetChanged();
 					dialog.dismiss(); // AlertDialog¸¦ ´Ý´Â´Ù.
 					conntectCheck();
+					
+					 NotificationManager nm = 
+						    	(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+					 nm.cancel(1234);
 				}
 			});
 
