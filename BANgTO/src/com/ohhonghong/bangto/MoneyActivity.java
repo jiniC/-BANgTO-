@@ -61,11 +61,6 @@ public class MoneyActivity extends Fragment {
 	int valueallsum = 0;
 	Context mContext;
 	public String group;
-	
-	SharedPreferences pref;
-	SharedPreferences.Editor editor;
-	int i = 0;
-
 
 
 	public MoneyActivity(Context context, String group) {
@@ -86,9 +81,6 @@ public class MoneyActivity extends Fragment {
 		money_dlg_radio_btn_in = (RadioButton) view.findViewById(R.id.money_dlg_radio_btn_in);
 		money_dlg_radio_btn_out = (RadioButton) view.findViewById(R.id.money_dlg_radio_btn_out);
 		
-		
-		pref = mContext.getSharedPreferences("pref", mContext.MODE_PRIVATE);
-		i = pref.getInt("i", 0);
 		
 		mListView = (ListView) view.findViewById(R.id.money_list);
 		mAdapter = new PayBookAdapter(getActivity());
@@ -138,7 +130,8 @@ public class MoneyActivity extends Fragment {
 							/*현재 잔고*/
 							//money_balance = (TextView) mListView.findViewById(R.id.money_balance);
 							//balance = Integer.parseInt(money_balance.toString())+Integer.parseInt(valueplus) -Integer.parseInt(valueminus) + 0;
-							balance = Integer.parseInt(((ListDataMoney) mListView.getItemAtPosition(i)).getMoney_balance())+Integer.parseInt(valueplus) -Integer.parseInt(valueminus) + 0;
+							int c = mListView.getCount();
+							balance = Integer.parseInt(((ListDataMoney) mListView.getItemAtPosition(c-1)).getMoney_balance())+Integer.parseInt(valueplus) -Integer.parseInt(valueminus) + 0;
 							valueall = Integer.toString(balance);
 						}
 
@@ -268,20 +261,6 @@ public class MoneyActivity extends Fragment {
 			break;
 		}
 	}
-	
-	public void onStop() {
-		// 어플리케이션이 화면에서 사라질때
-		super.onStop();
-		SharedPreferences pref = mContext.getSharedPreferences("pref",mContext.MODE_PRIVATE);
-		// UI 상태를 저장합니다.
-		editor = pref.edit();
-		// Editor를 불러옵니다.
-		
-		// 저장할 값들을 입력합니다.
-		editor.putInt("i", ++i);
 
-		editor.commit();
-		// 저장합니다.
-	}
 
 }
