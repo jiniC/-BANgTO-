@@ -50,8 +50,6 @@ public class MemoActivity extends Fragment {
 	public ListView mListView;
 	public MemoAdapter mAdapter;
 
-	private String m_user_name = "ÃÖ¼­Áø";
-
 	private SimpleDateFormat m_date_format = null;
 	private SimpleDateFormat m_time_format = null;
 
