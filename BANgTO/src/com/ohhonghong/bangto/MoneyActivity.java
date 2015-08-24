@@ -48,30 +48,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MoneyActivity extends Fragment {
-	
-	
+
 	public PayBookAsyncTask task;
 	public ListView mListView;
 	public PayBookAdapter mAdapter;
-	
+
 	ImageButton plus_btn;
-	//ImageView money_imgv;
+	// ImageView money_imgv;
 	DatePicker money_dlg_dp;
 	EditText money_dlg_edt1, money_dlg_edt2;
 	RadioButton money_dlg_radio_btn_in, money_dlg_radio_btn_out;
 
 	View moneyview;
 
-
-	String year, month, day, allday;
-	String valueplus, valueminus, valueall, contents;
-	String dbdate,dbvalueplus, dbvalueminus,dbvalueall, dbcontents;
-	String sum;
+	String year="", month="", day="", allday="";
+	String valueplus="", valueminus="", valueall="", contents="";
+	//String dbdate, dbvalueplus, dbvalueminus, dbvalueall, dbcontents;
+	String sum="0";
 	int valueallsum = 0;
 	Context mContext;
 	public String group;
 
-	public MoneyActivity(Context context,String group) {
+	public MoneyActivity(Context context, String group) {
 		mContext = context;
 		this.group = group;
 	}
@@ -82,7 +80,7 @@ public class MoneyActivity extends Fragment {
 		View view = inflater.inflate(R.layout.money, null);
 
 		plus_btn = (ImageButton) view.findViewById(R.id.plus_btn);
-		//money_imgv = (ImageView) view.findViewById(R.id.money_imgv);
+		// money_imgv = (ImageView) view.findViewById(R.id.money_imgv);
 		money_dlg_dp = (DatePicker) view.findViewById(R.id.money_dlg_dp);
 		money_dlg_edt1 = (EditText) view.findViewById(R.id.money_dlg_edt1);
 		money_dlg_edt2 = (EditText) view.findViewById(R.id.money_dlg_edt2);
@@ -93,7 +91,7 @@ public class MoneyActivity extends Fragment {
 		mAdapter = new PayBookAdapter(getActivity());
 		mListView.setAdapter(mAdapter);
 		conntectCheck();
-		
+
 		plus_btn.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -128,40 +126,36 @@ public class MoneyActivity extends Fragment {
 							valueplus = "0";
 							valueminus = money_dlg_edt2.getText().toString();
 						}
-						
-						
-						
-						int a =  Integer.parseInt(sum);
+
+						int a = Integer.parseInt(sum);
 						int b = Integer.parseInt(valueplus);
-						int c =  Integer.parseInt(valueminus);
-						valueallsum =  a+b - c + 0;
+						int c = Integer.parseInt(valueminus);
+						valueallsum = a + b - c + 0;
 						valueall = Integer.toString(valueallsum);
-						
-						
-						
-						AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-						// set the title of the Alert Dialog
 
-						alertDialogBuilder.setTitle("SAVE YOUR MONEY");
-
-						// set dialog message
-						alertDialogBuilder.setMessage("저장 하시겠습니까?").setCancelable(false)
-								.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-
-								
-								// Toast.makeText(
-								// mContext, "가계부가 저장되었습니다 :)", 0) .show();
-							}
-						}).setNegativeButton("No", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								// if no is clicked, just close
-								// the dialog box and do nothing
-								dialog.cancel();
-
-							}
-						}); //
 						/*
+						 * AlertDialog.Builder alertDialogBuilder = new
+						 * AlertDialog.Builder(getActivity()); // set the title
+						 * of the Alert Dialog
+						 * 
+						 * alertDialogBuilder.setTitle("SAVE YOUR MONEY");
+						 * 
+						 * // set dialog message alertDialogBuilder.setMessage(
+						 * "저장 하시겠습니까?").setCancelable(false)
+						 * .setPositiveButton("Yes", new
+						 * DialogInterface.OnClickListener() { public void
+						 * onClick(DialogInterface dialog, int id) {
+						 * 
+						 * 
+						 * // Toast.makeText( // mContext, "가계부가 저장되었습니다 :)", 0)
+						 * .show(); } }).setNegativeButton("No", new
+						 * DialogInterface.OnClickListener() { public void
+						 * onClick(DialogInterface dialog, int id) { // if no is
+						 * clicked, just close // the dialog box and do nothing
+						 * dialog.cancel();
+						 * 
+						 * } });
+						 */
 						Thread thread = new Thread() {
 							@Override
 							public void run() {
@@ -177,10 +171,12 @@ public class MoneyActivity extends Fragment {
 									List<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>(2);
 									nameValuePairs.add(new BasicNameValuePair("id", "test"));
 									nameValuePairs.add(new BasicNameValuePair("groupName", "test"));
-									nameValuePairs.add(new BasicNameValuePair("who", from));
-									nameValuePairs.add(new BasicNameValuePair("date", to));
-									nameValuePairs.add(new BasicNameValuePair("memo", money));
-									
+									nameValuePairs.add(new BasicNameValuePair("date", allday));
+									nameValuePairs.add(new BasicNameValuePair("plus", valueplus));
+									nameValuePairs.add(new BasicNameValuePair("minus", valueminus));
+									nameValuePairs.add(new BasicNameValuePair("balance", valueall));
+									nameValuePairs.add(new BasicNameValuePair("content", contents));
+
 									httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 									HttpResponse response = httpClient.execute(httpPost);
@@ -200,11 +196,11 @@ public class MoneyActivity extends Fragment {
 
 							}
 						};
-						
-						thread.start();
-*/
-						alertDialogBuilder.show();
 
+						thread.start();
+						/*
+						 * alertDialogBuilder.show();
+						 */
 					}
 				});
 
@@ -226,25 +222,23 @@ public class MoneyActivity extends Fragment {
 	}
 
 	// 웹에서 데이터를 가져오기 전에 먼저 네트워크 상태부터 확인
-		public void conntectCheck() {
-			ConnectivityManager connMgr = (ConnectivityManager) getActivity()
-					.getSystemService(Context.CONNECTIVITY_SERVICE);
-			NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+	public void conntectCheck() {
+		ConnectivityManager connMgr = (ConnectivityManager) getActivity()
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-			if (networkInfo != null && networkInfo.isConnected()) {
-				// fetch data
-				// Toast.makeText(this,"네트워크 연결중입니다.", Toast.LENGTH_SHORT).show();
+		if (networkInfo != null && networkInfo.isConnected()) {
+			// fetch data
+			// Toast.makeText(this,"네트워크 연결중입니다.", Toast.LENGTH_SHORT).show();
 
-				task = new PayBookAsyncTask(MoneyActivity.this);
-				task.execute("");
+			task = new PayBookAsyncTask(MoneyActivity.this);
+			task.execute("");
 
-			} else {
-				// display error
-				Toast.makeText(getActivity(), "네트워크 상태를 확인하십시오", Toast.LENGTH_SHORT).show();
-			}
+		} else {
+			// display error
+			Toast.makeText(getActivity(), "네트워크 상태를 확인하십시오", Toast.LENGTH_SHORT).show();
 		}
-		
-	
+	}
 
 	// 라디오 버튼을 선택했을 때
 	public void onCheckedChanged(RadioGroup arg0, int arg1) {
