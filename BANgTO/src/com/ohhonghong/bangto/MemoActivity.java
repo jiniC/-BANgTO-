@@ -104,7 +104,8 @@ public class MemoActivity extends Fragment {
 							httpPost.setURI(url);
 
 							List<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>(2);
-							nameValuePairs.add(new BasicNameValuePair("groupName", group));
+							nameValuePairs.add(new BasicNameValuePair("id", "test"));
+							nameValuePairs.add(new BasicNameValuePair("groupName", "test"));
 							nameValuePairs.add(new BasicNameValuePair("who", "test"));
 							nameValuePairs.add(new BasicNameValuePair("date", date));
 							nameValuePairs.add(new BasicNameValuePair("memo", memo));
