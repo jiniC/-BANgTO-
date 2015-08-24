@@ -30,15 +30,17 @@ public class NotificationBuilder extends Activity{
 			
 			PendingIntent intent = PendingIntent.getActivity(
 					NotificationBuilder.this, 0, 
-					new Intent(NotificationBuilder.this, NotificationMessage.class), 0);
+					new Intent(NotificationBuilder.this, GroupMenuActivity.class), 0);
 			
 			// Create Notification Object
 			Notification notification =
-				new Notification(android.R.drawable.ic_input_add,
+				new Notification(R.drawable.pushicon,
 						"µ· °±±â", System.currentTimeMillis()+60);
+			
 			
 			notification.setLatestEventInfo(NotificationBuilder.this, 
 					"BANgTO °øÁö", "¾ÆÁ÷ °±¾Æ¾ß ÇÒ µ·ÀÌ ÀÖ½À´Ï´Ù.", intent);
+			
 			
 			nm.notify(1234, notification);
 			mVibe = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
