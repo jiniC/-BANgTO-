@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert Bank_Info</title>
 </head>
 <body>
@@ -14,19 +14,19 @@
 		Statement stmt = null;
 		try {
 			/*
-			 * ¿¬°á
+			 * ì—°ê²°
 			 */
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BANgTO", "root", "bangto");
 
 
 			if (conn == null)
-				throw new Exception("µ¥ÀÌÅÍº£ÀÌ½º¿¡ ¿¬°áÇÒ ¼ö ¾ø½À´Ï´Ù.<BR> ");
+				throw new Exception("ë°ì´í„°ë² ì´ìŠ¤ì— ì—°ê²°í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.<BR> ");
 
 			/*
-			 * ÀÔ·Â
+			 * ì…ë ¥
 			 */
-			request.setCharacterEncoding("euc-kr");
+			request.setCharacterEncoding("UTF-8");
 			String email = request.getParameter("email");
 			String bank = request.getParameter("bank");
 			String account = request.getParameter("account");
@@ -36,7 +36,7 @@
 					"insert into Bank_Info (email,bank,account) values ('"+email+"','"+bank+"','"+account+"'); ");
 			int rowNum = stmt.executeUpdate(command);
 			if (rowNum < 1)
-				throw new Exception("µ¥ÀÌÅÍ¸¦ DB¿¡ ÀÔ·ÂÇÒ ¼ö ¾ø½À´Ï´Ù. ");
+				throw new Exception("ë°ì´í„°ë¥¼ DBì— ì…ë ¥í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤. ");
 
 		} finally {
 			try {
