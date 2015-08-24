@@ -34,7 +34,7 @@ public class PersonalInfoActivity extends Activity {
 	ImageButton ibNext;
 	Spinner bankspinner;
 	EditText account;
-	String bank, acc;
+	String bank, acc,userName,email;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,10 @@ public class PersonalInfoActivity extends Activity {
 				// TODO Auto-generated method stub
 
 				acc = account.getText().toString();
-
+				
+				Intent i = getIntent();
+				userName = i.getStringExtra("userName");
+				email = i.getStringExtra("email");
 				Thread thread = new Thread() {
 					@Override
 					public void run() {
@@ -90,8 +93,8 @@ public class PersonalInfoActivity extends Activity {
 
 							List<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>(2);
 							
-							nameValuePairs.add(new BasicNameValuePair("email", "testEmail"));
-							nameValuePairs.add(new BasicNameValuePair("username", "testUsername"));
+							nameValuePairs.add(new BasicNameValuePair("email", email));
+							nameValuePairs.add(new BasicNameValuePair("username", userName));
 							nameValuePairs.add(new BasicNameValuePair("bank", bank));
 							nameValuePairs.add(new BasicNameValuePair("account", acc));
 							

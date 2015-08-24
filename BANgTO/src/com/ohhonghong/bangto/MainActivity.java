@@ -25,6 +25,9 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
    private ProgressDialog mConnectionProgressDialog;
    private GoogleApiClient mPlusClient;
    private ConnectionResult mConnectionResult;
+   
+   String personName;
+   String email ;
 
    //Button sign_in_button;
 
@@ -95,15 +98,17 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
        //String accountName = mPlusClient.getAccountName();
        //Toast.makeText(this, accountName + " is connected.",
        //Toast.LENGTH_LONG).show();
+	   
+	   /*구글 정보 가져오기*/
 	   Person currentPerson = Plus.PeopleApi.getCurrentPerson(mPlusClient);
-	   String personName = currentPerson.getDisplayName();
-	   String personPhotoUrl = currentPerson.getImage().getUrl();
-	   String email = Plus.AccountApi.getAccountName(mPlusClient);
+	   personName = currentPerson.getDisplayName();
+	   email = Plus.AccountApi.getAccountName(mPlusClient);
 	   Log.d(personName, "personName");
-	   Log.d(personPhotoUrl, "personPhotoUrl");
 	   Log.d(email, "email");
 
       Intent intent = new Intent(this, PersonalInfoActivity.class);
+      intent.putExtra("userName",personName);
+      intent.putExtra("email", email);
       startActivity(intent);
    }
 
