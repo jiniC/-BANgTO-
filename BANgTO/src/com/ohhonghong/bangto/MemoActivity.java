@@ -50,12 +50,15 @@ public class MemoActivity extends Fragment {
 	public ListView mListView;
 	public MemoAdapter mAdapter;
 
-	private SimpleDateFormat m_date_format = null;
-	private SimpleDateFormat m_time_format = null;
-
+	SimpleDateFormat m_date_format = null;
+	SimpleDateFormat m_time_format = null;
+	String dateS,timeS;
+	
 	ImageButton sendbutton;
 	TextView message;
-
+	String memo;
+	String date;
+	
 	Context mContext;
 	public String group;
 
@@ -84,11 +87,16 @@ public class MemoActivity extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				final String memo = message.getText().toString();
+				memo = message.getText().toString();
+				
+				long now = System.currentTimeMillis();// 현재 시간을 msec으로 구한다.
+				Date date = new Date(now);// 현재 시간을 저장 한다.
 				m_date_format = new SimpleDateFormat("yyyy/MM/dd", Locale.KOREA);
 				m_time_format = new SimpleDateFormat("HH:mm:ss", Locale.KOREA);
-
-				final String date = m_date_format + " " + m_time_format;
+				dateS =  m_date_format.format(date);
+				timeS = m_time_format.format(date);
+				
+				
 				Thread thread = new Thread() {
 					@Override
 					public void run() {
@@ -105,7 +113,7 @@ public class MemoActivity extends Fragment {
 							//nameValuePairs.add(new BasicNameValuePair("id", "test"));
 							nameValuePairs.add(new BasicNameValuePair("groupName", group));
 							nameValuePairs.add(new BasicNameValuePair("who", "test"));
-							nameValuePairs.add(new BasicNameValuePair("date", date));
+							nameValuePairs.add(new BasicNameValuePair("date", dateS + " " + timeS));
 							nameValuePairs.add(new BasicNameValuePair("memo", memo));
 
 							httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -132,15 +140,18 @@ public class MemoActivity extends Fragment {
 				
 				String sendmessage = message.getText().toString();
 				message.setText("");
-				ListDataMemo data = null;
+				
+				/*ListDataMemo data = null;
 				data = new ListDataMemo();
 				data.setUsername("test");
 				data.setMemo(sendmessage);
 				mAdapter.add(data);
-
-				mListView.smoothScrollToPosition(mAdapter.getCount() - 1);
-
-				data_list.add(data);
+				data_list.add(data);*/
+				
+				//mListView.smoothScrollToPosition(mAdapter.getCount() - 1);
+				mListView.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
+				mAdapter.notifyDataSetChanged();
+				conntectCheck();
 			}
 		});
 

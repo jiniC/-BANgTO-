@@ -33,7 +33,7 @@
 			
 			stmt = conn.createStatement();
 			String command = String.format(
-					"INSERT INTO `Memo`(`groupName`, `who`, `date`, `memo`) VALUES ('"+groupName+"','"+who+"',"+date+",'"+memo+"'); ");
+					"INSERT INTO `Memo`(`groupName`, `who`, `date`, `memo`) VALUES ('"+groupName+"','"+who+"','"+date+"','"+memo+"'); ");
 			int rowNum = stmt.executeUpdate(command);
 			if (rowNum < 1)
 				throw new Exception("데이터를 DB에 입력할 수 없습니다. ");

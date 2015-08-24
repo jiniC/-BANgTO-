@@ -26,11 +26,11 @@ public class MemoAdapter extends BaseAdapter{
 		
 	}
 	
-	public void add(ListDataMemo parm_data) {
+	/*public void add(ListDataMemo parm_data) {
 		lst.add(parm_data);
 		notifyDataSetChanged();
 	}
-	
+	*/
 	public int getCount() {
 		return lst.size();
 	}

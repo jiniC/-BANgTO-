@@ -32,7 +32,7 @@
 		while (rs.next()) {
 			String groupName = rs.getString("groupName");
 			String who = rs.getString("who");
-			Date date = rs.getDate("date");
+			String date = rs.getString("date");
 			String memo = rs.getString("memo");
 
 			//하나의 정보를 저장할 JSONObject를 설정
