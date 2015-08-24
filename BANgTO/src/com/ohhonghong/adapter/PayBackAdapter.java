@@ -29,8 +29,8 @@ public class PayBackAdapter extends BaseAdapter{
 		return lst.size();
 	}
 	
-	public Object getItem(int arg0) {
-		return null;
+	public Object getItem(int i) {
+		return lst.get(i);
 	}
 	
 	public long getItemId(int arg0) {
