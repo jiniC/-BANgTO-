@@ -26,6 +26,7 @@ import com.ohhonghong.utility.GroupAsyncTask;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -75,6 +76,12 @@ public class GroupMenuActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.groupmenu);
 
+	    NotificationManager nm = 
+		    	(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+		    
+		    // Cancel Notification
+		    nm.cancel(1234);
+		
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayShowTitleEnabled(false);
@@ -422,7 +429,7 @@ public class GroupMenuActivity extends Activity {
 
 			alertDlg.setMessage("그룹을 삭제하시겠습니까?");
 			alertDlg.show();
-			return false;
+			return true;
 		}
 
 	}

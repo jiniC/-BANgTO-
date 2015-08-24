@@ -272,7 +272,7 @@ public class BankActivity extends Fragment {
 
 			alertDlg.setMessage("Á¤¸»·Î µ·À» °±À¸¼Ì³ª¿ä?");
 			alertDlg.show();
-			return false;
+			return true;
 		}
 
 	}
