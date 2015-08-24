@@ -61,14 +61,14 @@ public class MemoActivity extends Fragment {
 	 
 	Context mContext;
 	public String group;
-	public String email;
+	public String user;
 
 	ArrayList<ListDataMemo> data_list = new ArrayList<ListDataMemo>();
 
-	public MemoActivity(Context context, String group,String email) {
+	public MemoActivity(Context context, String group,String userName) {
 		mContext = context;
 		this.group = group;
-		this.email = email;
+		this.user = userName;
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class MemoActivity extends Fragment {
 				memo = message.getText().toString();
 				
 				
-				Log.d(email, "emailmemo");
+				Log.d(user, "user");
 				
 				long now = System.currentTimeMillis();// 현재 시간을 msec으로 구한다.
 				Date date = new Date(now);// 현재 시간을 저장 한다.
@@ -118,11 +118,11 @@ public class MemoActivity extends Fragment {
 							// nameValuePairs.add(new BasicNameValuePair("id",
 							// "test"));
 							nameValuePairs.add(new BasicNameValuePair("groupName", group));
-							nameValuePairs.add(new BasicNameValuePair("who", email));
+							nameValuePairs.add(new BasicNameValuePair("who", user));
 							nameValuePairs.add(new BasicNameValuePair("date", dateS + " " + timeS));
 							nameValuePairs.add(new BasicNameValuePair("memo", memo));
 
-							httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+							httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF_8"));
 
 							HttpResponse response = httpClient.execute(httpPost);
 							String responseString = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);

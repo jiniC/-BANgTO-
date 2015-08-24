@@ -65,7 +65,7 @@ public class GroupMenuActivity extends Activity {
 	TextView etMemberName;
 	TextView tvGroup;
 
-	String email;
+	String userName;
 
 	private BackPressCloseHandler backPressCloseHandler;
 	private ArrayList<ListDataGroup> mListData = new ArrayList<ListDataGroup>();
@@ -119,8 +119,8 @@ public class GroupMenuActivity extends Activity {
 		
 		//memo에 email 정보 받아오기
 		Intent i = getIntent();
-		email = i.getStringExtra("email2");
-		Log.d(email, "emailg2");
+		userName = i.getStringExtra("userName");
+		Log.d(userName, "userName");
 		
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -145,8 +145,8 @@ public class GroupMenuActivity extends Activity {
 				Intent intent = new Intent(getApplicationContext(), TabMainActivity.class);
 				intent.putExtra("group", GroupName.getText());
 				
-				intent.putExtra("email3", email);
-				Log.d(email, "emailgroup");
+				intent.putExtra("userName", userName);
+				Log.d(userName, "userName");
 				// 위에서 만든 Bundle을 인텐트에 넣는다.
 				// intent.putExtras(extras);
 				// 액티비티를 생성한다.
@@ -197,7 +197,7 @@ public class GroupMenuActivity extends Activity {
 									nameValuePairs.add(new BasicNameValuePair("groupName", groupName));
 									nameValuePairs.add(new BasicNameValuePair("member", "test"));
 
-									httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+									httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF_8"));
 
 									HttpResponse response = httpClient.execute(httpPost);
 									String responseString = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);

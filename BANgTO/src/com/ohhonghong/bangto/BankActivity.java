@@ -69,6 +69,7 @@ public class BankActivity extends Fragment {
 		this.group = group;
 	}
 
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -80,7 +81,7 @@ public class BankActivity extends Fragment {
 		conntectCheck();
 
 		ib_manage_add = (ImageButton) view.findViewById(R.id.ib_manage_add);
-		
+		Log.d(group, "group");
 		
 		mListView.setOnItemLongClickListener(new ListViewItemLongClickListener());
 		ib_manage_add.setOnClickListener(new OnClickListener() {
@@ -129,7 +130,7 @@ public class BankActivity extends Fragment {
 									nameValuePairs.add(new BasicNameValuePair("to", to));
 									nameValuePairs.add(new BasicNameValuePair("howMuch", money));
 									
-									httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+									httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF_8"));
 
 									HttpResponse response = httpClient.execute(httpPost);
 									String responseString = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);

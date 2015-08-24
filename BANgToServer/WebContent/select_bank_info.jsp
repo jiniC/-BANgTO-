@@ -12,7 +12,7 @@
 		 * 연결
 		 */
 		Class.forName("com.mysql.jdbc.Driver");
-		conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BANgTO", "root", "bangto");
+		conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BANgTO?useUnicode=true&characterEncoding=UTF8", "root", "bangto");
 		// "mysql URL/데이터베이스 이름", "ID", "PASSWORD"
 		//int n = 0;
 
@@ -24,7 +24,10 @@
 		 */
 		
 		stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select * from Bank_Info,GroupInvite where GroupInvite.groupName = "+ request.getParameter("groupName")+" and Bank_Info.groupName ="+request.getParameter("groupName")+"; ");
+		request.setCharacterEncoding("UTF-8");
+		String group = request.getParameter("groupName");
+		group = new String(group.getBytes("ISO-8859-1"), "UTF-8");
+		ResultSet rs = stmt.executeQuery("select * from Bank_Info,GroupInvite where GroupInvite.groupName = "+ group+" and Bank_Info.groupName ="+group+"; ");
 
 		JSONObject jsonMain = new JSONObject();
 		JSONArray jArray = new JSONArray();

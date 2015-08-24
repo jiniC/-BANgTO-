@@ -179,7 +179,7 @@ public class MoneyActivity extends Fragment {
 									nameValuePairs.add(new BasicNameValuePair("balance", valueall));
 									nameValuePairs.add(new BasicNameValuePair("content", contents));
 
-									httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+									httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF_8"));
 
 									HttpResponse response = httpClient.execute(httpPost);
 									String responseString = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);

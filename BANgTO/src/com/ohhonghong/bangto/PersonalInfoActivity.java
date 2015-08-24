@@ -109,7 +109,7 @@ public class PersonalInfoActivity extends Activity {
 							nameValuePairs.add(new BasicNameValuePair("bank", bank));
 							nameValuePairs.add(new BasicNameValuePair("account", acc));
 							
-							httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+							httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF_8"));
 
 							HttpResponse response = httpClient.execute(httpPost);
 							String responseString = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
@@ -132,8 +132,8 @@ public class PersonalInfoActivity extends Activity {
 				thread.start();
 
 				Intent intent = new Intent(getApplicationContext(), GroupMenuActivity.class);
-				intent.putExtra("email2",email);
-				Log.d(email, "emailperson");
+				intent.putExtra("userName",userName);
+				Log.d(userName, "userName");
 				startActivity(intent);
 
 			}
