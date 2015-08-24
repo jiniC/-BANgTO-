@@ -23,7 +23,7 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
    private static final int REQUEST_CODE_RESOLVE_ERR = 9000;
 
    private ProgressDialog mConnectionProgressDialog;
-   private GoogleApiClient mPlusClient;
+   private GoogleApiClient mGoogleApiClient;
    private ConnectionResult mConnectionResult;
    
    String personName;
@@ -41,7 +41,7 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
       actionBar.setDisplayShowTitleEnabled(false);
       actionBar.setDisplayShowHomeEnabled(false);
       actionBar.hide();
-      mPlusClient = new GoogleApiClient.Builder(this).addApi(Plus.API).addScope(Plus.SCOPE_PLUS_LOGIN)
+      mGoogleApiClient = new GoogleApiClient.Builder(this).addApi(Plus.API).addScope(Plus.SCOPE_PLUS_LOGIN)
             .addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
       // Progress bar to be displayed if the connection failure is not
       // resolved.
@@ -56,13 +56,15 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
    @Override
    protected void onStart() {
       super.onStart();
-      mPlusClient.connect();
+      mGoogleApiClient.connect();
    }
 
    @Override
    protected void onStop() {
       super.onStop();
-      mPlusClient.disconnect();
+      if (mGoogleApiClient.isConnected()) {
+			mGoogleApiClient.disconnect();
+		}
    }
 
    @Override
@@ -76,7 +78,7 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
             try {
                result.startResolutionForResult(this, REQUEST_CODE_RESOLVE_ERR);
             } catch (SendIntentException e) {
-               mPlusClient.connect();
+            	mGoogleApiClient.connect();
             }
          }
       }
@@ -88,7 +90,7 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
    protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
       if (requestCode == REQUEST_CODE_RESOLVE_ERR && responseCode == RESULT_OK) {
          mConnectionResult = null;
-         mPlusClient.connect();
+         mGoogleApiClient.connect();
       }
    }
 
@@ -100,9 +102,9 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
        //Toast.LENGTH_LONG).show();
 	   
 	   /*구글 정보 가져오기*/
-	   Person currentPerson = Plus.PeopleApi.getCurrentPerson(mPlusClient);
+	   Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
 	   personName = currentPerson.getDisplayName();
-	   email = Plus.AccountApi.getAccountName(mPlusClient);
+	   email = Plus.AccountApi.getAccountName(mGoogleApiClient);
 	   Log.d(personName, "personName");
 	   Log.d(email, "email");
 
@@ -115,14 +117,14 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
    @Override
    public void onConnectionSuspended(int cause) {
       // TODO Auto-generated method stub
-	   mPlusClient.connect();
+	   mGoogleApiClient.connect();
    }
 
    @Override
    public void onClick(View view) {
       // TODO Auto-generated method stub
 
-      if (view.getId() == R.id.sign_in_button && !mPlusClient.isConnected()) {
+      if (view.getId() == R.id.sign_in_button && !mGoogleApiClient.isConnected()) {
          if (mConnectionResult == null) {
             mConnectionProgressDialog.show();
          } else {
@@ -131,7 +133,7 @@ public class MainActivity extends Activity implements OnClickListener, Connectio
             } catch (SendIntentException e) {
                // Try connecting again.
                mConnectionResult = null;
-               mPlusClient.connect();
+               mGoogleApiClient.connect();
             }
          }
       }
