@@ -39,6 +39,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -63,9 +64,12 @@ public class GroupMenuActivity extends Activity {
 	EditText etGroupName;
 	TextView etMemberName;
 	TextView tvGroup;
-	
+
+	String email;
+
+	private BackPressCloseHandler backPressCloseHandler;
 	private ArrayList<ListDataGroup> mListData = new ArrayList<ListDataGroup>();
-	
+
 	Typeface childFont;
 
 	private static final int REQUEST_INVITE = 0;
@@ -77,12 +81,11 @@ public class GroupMenuActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.groupmenu);
 
-	    NotificationManager nm = 
-		    	(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-		    
-		    // Cancel Notification
-		    nm.cancel(1234);
-		
+		NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		backPressCloseHandler = new BackPressCloseHandler(this);
+		// Cancel Notification
+		nm.cancel(1234);
+
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setDisplayShowTitleEnabled(false);
@@ -94,8 +97,9 @@ public class GroupMenuActivity extends Activity {
 		mListView = (ListView) findViewById(R.id.listview);
 		mAdapter = new GroupAdapter(this);
 		/*
-		mAdapter.notifyDataSetInvalidated();
-		mAdapter.notifyDataSetChanged() ;*/
+		 * mAdapter.notifyDataSetInvalidated(); mAdapter.notifyDataSetChanged()
+		 * ;
+		 */
 		mListView.setAdapter(mAdapter);
 		conntectCheck();
 
@@ -127,15 +131,16 @@ public class GroupMenuActivity extends Activity {
 				// extras.putString("title", data.getTitle());
 				// extras.putString("description", data.getDescription());
 				// extras.putInt("color", data.getColor());
-				//String groupName = mListData.get(position).groupName;
-				//Log.i( mListData.get(position).groupName, "hyunhye");
-				
-				//ListData m = data.get(position);
-				TextView GroupName = (TextView)view.findViewById(R.id.tvGroupName);
-				
+				// String groupName = mListData.get(position).groupName;
+				// Log.i( mListData.get(position).groupName, "hyunhye");
+
+				// ListData m = data.get(position);
+				TextView GroupName = (TextView) view.findViewById(R.id.tvGroupName);
+
 				Intent intent = new Intent(getApplicationContext(), TabMainActivity.class);
-				intent.putExtra("group",GroupName.getText());
-				
+				intent.putExtra("group", GroupName.getText());
+				email = intent.getStringExtra("email");
+				intent.putExtra("email", email);
 				// 위에서 만든 Bundle을 인텐트에 넣는다.
 				// intent.putExtras(extras);
 				// 액티비티를 생성한다.
@@ -205,12 +210,12 @@ public class GroupMenuActivity extends Activity {
 
 							}
 						};
-						
+
 						thread.start();
 						/*
-						mAdapter.notifyDataSetChanged() ;
-						mAdapter.notifyDataSetInvalidated();
-						*/
+						 * mAdapter.notifyDataSetChanged() ;
+						 * mAdapter.notifyDataSetInvalidated();
+						 */
 						conntectCheck();
 					}
 				});
@@ -356,22 +361,22 @@ public class GroupMenuActivity extends Activity {
 
 	//////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////
-	
-	/*롱클릭시 삭제*/
+
+	/* 롱클릭시 삭제 */
 	private class ListViewItemLongClickListener implements AdapterView.OnItemLongClickListener {
 		@Override
 		public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-			
+
 			AlertDialog.Builder alertDlg = new AlertDialog.Builder(view.getContext());
 			alertDlg.setTitle(R.string.alert_title_question);
-			
-			tvGroup = (TextView)view.findViewById(R.id.tvGroupName);
-			
+
+			tvGroup = (TextView) view.findViewById(R.id.tvGroupName);
+
 			// '예' 버튼이 클릭되면
 			alertDlg.setPositiveButton(R.string.button_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					
+
 					//////////////////////////////////////////////////////////////////////////
 					//////////////////////////////////////////////////////////////////////////
 					Thread thread = new Thread() {
@@ -385,10 +390,10 @@ public class GroupMenuActivity extends Activity {
 
 								HttpPost httpPost = new HttpPost();
 								httpPost.setURI(url);
-								
+
 								List<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>(2);
 								nameValuePairs.add(new BasicNameValuePair("groupName", tvGroup.getText().toString()));
-								
+
 								Log.d(tvGroup.getText().toString(), "hyunhye");
 
 								httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -410,17 +415,16 @@ public class GroupMenuActivity extends Activity {
 
 						}
 					};
-					
+
 					thread.start();
 
 					// 아래 method를 호출하지 않을 경우, 삭제된 item이 화면에 계속 보여진다.
 					mAdapter.notifyDataSetChanged();
 					dialog.dismiss(); // AlertDialog를 닫는다.
 					conntectCheck();
-					
-					 NotificationManager nm = 
-						    	(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-					 nm.cancel(1234);
+
+					NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+					nm.cancel(1234);
 				}
 			});
 
@@ -437,5 +441,52 @@ public class GroupMenuActivity extends Activity {
 			return true;
 		}
 
+	}
+
+	/*public boolean onKeyDown(int keyCode, KeyEvent event) {
+		switch (keyCode) {
+		case KeyEvent.KEYCODE_BACK:
+			//finish();
+			// 프로세스 종료.
+            android.os.Process.killProcess(android.os.Process.myPid());
+		default:
+			return false;
+		}
+	}*/
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		backPressCloseHandler.onBackPressed();
+	}
+	class BackPressCloseHandler {
+		private long backKeyPressedTime = 0;
+		private Toast toast;
+
+		private Activity activity;
+
+
+		public BackPressCloseHandler(Activity context) {
+			this.activity = context;
+		}
+
+		public void onBackPressed() {
+			if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+				backKeyPressedTime = System.currentTimeMillis();
+				showGuide();
+				return;
+			}
+			if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+				activity.finish();
+				moveTaskToBack(true);// 본 Activity finish후 다른 Activity가 뜨는 걸 방지. finish();
+				System.exit(0);
+				android.os.Process.killProcess(android.os.Process.myPid());
+				toast.cancel();
+			}
+		}
+
+		private void showGuide() {
+			toast = Toast.makeText(activity, "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
+			toast.show();
+		}
 	}
 }

@@ -24,6 +24,7 @@ public class NotificationBuilder extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.loading);
         Log.d("a", "hae2");
 			// Get Notification Service
 			nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);

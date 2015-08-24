@@ -61,12 +61,14 @@ public class MemoActivity extends Fragment {
 	 
 	Context mContext;
 	public String group;
+	public String email;
 
 	ArrayList<ListDataMemo> data_list = new ArrayList<ListDataMemo>();
 
-	public MemoActivity(Context context, String group) {
+	public MemoActivity(Context context, String group,String email) {
 		mContext = context;
 		this.group = group;
+		this.email = email;
 	}
 
 	@Override
@@ -89,7 +91,10 @@ public class MemoActivity extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				memo = message.getText().toString();
-
+				
+				
+				Log.d(email, "emailmemo");
+				
 				long now = System.currentTimeMillis();// 현재 시간을 msec으로 구한다.
 				Date date = new Date(now);// 현재 시간을 저장 한다.
 				m_date_format = new SimpleDateFormat("yyyy/MM/dd", Locale.KOREA);
@@ -113,7 +118,7 @@ public class MemoActivity extends Fragment {
 							// nameValuePairs.add(new BasicNameValuePair("id",
 							// "test"));
 							nameValuePairs.add(new BasicNameValuePair("groupName", group));
-							nameValuePairs.add(new BasicNameValuePair("who", "test"));
+							nameValuePairs.add(new BasicNameValuePair("who", email));
 							nameValuePairs.add(new BasicNameValuePair("date", dateS + " " + timeS));
 							nameValuePairs.add(new BasicNameValuePair("memo", memo));
 

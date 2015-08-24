@@ -21,7 +21,7 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
    SectionsPagerAdapter mSectionsPagerAdapter;
    ViewPager mViewPager;
    String group;
-
+   String email;
    
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
       //mTabs.add(new SamplePagerItem(getString(R.string.tab_stream),Color.BLUE,Color.GRAY));
       Intent intent = getIntent();
       group = intent.getStringExtra("group");
+      email = intent.getStringExtra("email");
       
    }
 
@@ -81,7 +82,7 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
          case 2:
             return new MoneyActivity(mContext,group);
          case 3:
-            return new MemoActivity(mContext,group);
+            return new MemoActivity(mContext,group,email);
          }
          return null;
       }

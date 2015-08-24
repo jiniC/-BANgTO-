@@ -50,12 +50,13 @@ public class PersonalInfoActivity extends Activity {
 		bankspinner = (Spinner) findViewById(R.id.spinner);
 		account = (EditText) findViewById(R.id.account);
 
-		if(account!=null)
+		/*if(account!=null)
 		{
 			Intent intent = new Intent(this,GroupMenuActivity.class);
-		      startActivity(intent);
+			intent.putExtra("email",email);
+		    startActivity(intent);
 
-		}
+		}*/
 		
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowTitleEnabled(false);
@@ -131,6 +132,7 @@ public class PersonalInfoActivity extends Activity {
 				thread.start();
 
 				Intent intent = new Intent(getApplicationContext(), GroupMenuActivity.class);
+				intent.putExtra("email",email);
 				startActivity(intent);
 
 			}
