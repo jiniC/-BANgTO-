@@ -528,17 +528,18 @@ containing a value of this type.
         public static final int plus_btn3=0x7f020045;
         public static final int powered_by_google_dark=0x7f020046;
         public static final int powered_by_google_light=0x7f020047;
-        public static final int sendbutton=0x7f020048;
-        public static final int starticon=0x7f020049;
-        public static final int t_bank=0x7f02004a;
-        public static final int t_bank2=0x7f02004b;
-        public static final int t_chat=0x7f02004c;
-        public static final int t_member3=0x7f02004d;
-        public static final int t_money=0x7f02004e;
-        public static final int t_num=0x7f02004f;
-        public static final int tab_bank=0x7f020050;
-        public static final int tab_manage=0x7f020051;
-        public static final int tab_member=0x7f020052;
+        public static final int pushicon=0x7f020048;
+        public static final int sendbutton=0x7f020049;
+        public static final int starticon=0x7f02004a;
+        public static final int t_bank=0x7f02004b;
+        public static final int t_bank2=0x7f02004c;
+        public static final int t_chat=0x7f02004d;
+        public static final int t_member3=0x7f02004e;
+        public static final int t_money=0x7f02004f;
+        public static final int t_num=0x7f020050;
+        public static final int tab_bank=0x7f020051;
+        public static final int tab_manage=0x7f020052;
+        public static final int tab_member=0x7f020053;
     }
     public static final class id {
         public static final int account=0x7f07004b;
