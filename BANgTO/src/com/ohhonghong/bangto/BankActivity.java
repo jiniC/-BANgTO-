@@ -1,9 +1,23 @@
 package com.ohhonghong.bangto;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 
 import com.ohhonghong.adapter.MemberAdapter;
 import com.ohhonghong.adapter.PayBackAdapter;
@@ -21,6 +35,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -78,9 +93,9 @@ public class BankActivity extends Fragment {
 				// 입력된 내용을 받아드리겠다. (확인 버튼)
 				dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						String to = etTo.getText().toString();
-						String from = etFrom.getText().toString();
-						String money = etMoney.getText().toString();
+						final String to = etTo.getText().toString();
+						final String from = etFrom.getText().toString();
+						final String money = etMoney.getText().toString();
 						//mAdapter.addItem(to, from, money);
 
 						Calendar calendar = Calendar.getInstance();
@@ -88,6 +103,48 @@ public class BankActivity extends Fragment {
 
 						Timer timer = new Timer();
 						timer.schedule(timerTask, sec + 60000);
+						
+						Thread thread = new Thread() {
+							@Override
+							public void run() {
+								HttpClient httpClient = new DefaultHttpClient();
+								String urlString = "http://119.205.252.231:8080/BANgToServer/insert_payback.jsp";
+								String TAG = "ing";
+								try {
+									URI url = new URI(urlString);
+
+									HttpPost httpPost = new HttpPost();
+									httpPost.setURI(url);
+
+									List<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>(2);
+									nameValuePairs.add(new BasicNameValuePair("id", "test"));
+									nameValuePairs.add(new BasicNameValuePair("groupName", "test"));
+									nameValuePairs.add(new BasicNameValuePair("from", from));
+									nameValuePairs.add(new BasicNameValuePair("to", to));
+									nameValuePairs.add(new BasicNameValuePair("howMuch", money));
+									
+									httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+									HttpResponse response = httpClient.execute(httpPost);
+									String responseString = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
+
+									Log.d(TAG, responseString);
+								} catch (URISyntaxException e) {
+									Log.e(TAG, e.getLocalizedMessage());
+									e.printStackTrace();
+								} catch (ClientProtocolException e) {
+									Log.e(TAG, e.getLocalizedMessage());
+									e.printStackTrace();
+								} catch (IOException e) {
+									Log.e(TAG, e.getLocalizedMessage());
+									e.printStackTrace();
+								}
+
+							}
+						};
+						
+						thread.start();
+						
 					}
 				});
 

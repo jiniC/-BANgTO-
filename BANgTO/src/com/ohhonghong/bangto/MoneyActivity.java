@@ -1,6 +1,20 @@
 package com.ohhonghong.bangto;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 
 import com.ohhonghong.adapter.PayBackAdapter;
 import com.ohhonghong.adapter.PayBookAdapter;
@@ -18,6 +32,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,6 +136,9 @@ public class MoneyActivity extends Fragment {
 						int c =  Integer.parseInt(valueminus);
 						valueallsum =  a+b - c + 0;
 						valueall = Integer.toString(valueallsum);
+						
+						
+						
 						AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
 						// set the title of the Alert Dialog
 
@@ -143,7 +161,48 @@ public class MoneyActivity extends Fragment {
 
 							}
 						}); //
+						/*
+						Thread thread = new Thread() {
+							@Override
+							public void run() {
+								HttpClient httpClient = new DefaultHttpClient();
+								String urlString = "http://119.205.252.231:8080/BANgToServer/insert_paybook.jsp";
+								String TAG = "ing";
+								try {
+									URI url = new URI(urlString);
 
+									HttpPost httpPost = new HttpPost();
+									httpPost.setURI(url);
+
+									List<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>(2);
+									nameValuePairs.add(new BasicNameValuePair("id", "test"));
+									nameValuePairs.add(new BasicNameValuePair("groupName", "test"));
+									nameValuePairs.add(new BasicNameValuePair("who", from));
+									nameValuePairs.add(new BasicNameValuePair("date", to));
+									nameValuePairs.add(new BasicNameValuePair("memo", money));
+									
+									httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+									HttpResponse response = httpClient.execute(httpPost);
+									String responseString = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
+
+									Log.d(TAG, responseString);
+								} catch (URISyntaxException e) {
+									Log.e(TAG, e.getLocalizedMessage());
+									e.printStackTrace();
+								} catch (ClientProtocolException e) {
+									Log.e(TAG, e.getLocalizedMessage());
+									e.printStackTrace();
+								} catch (IOException e) {
+									Log.e(TAG, e.getLocalizedMessage());
+									e.printStackTrace();
+								}
+
+							}
+						};
+						
+						thread.start();
+*/
 						alertDialogBuilder.show();
 
 					}
