@@ -16,18 +16,13 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
-import com.ohhonghong.adapter.PayBackAdapter;
 import com.ohhonghong.adapter.PayBookAdapter;
-import com.ohhonghong.data.ListDataMoney;
-import com.ohhonghong.utility.PayBackAsyncTask;
 import com.ohhonghong.utility.PayBookAsyncTask;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -36,11 +31,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -49,6 +42,9 @@ import android.widget.Toast;
 
 public class MoneyActivity extends Fragment {
 
+
+	
+	/* 디비 연결*/
 	public PayBookAsyncTask task;
 	public ListView mListView;
 	public PayBookAdapter mAdapter;
@@ -60,6 +56,8 @@ public class MoneyActivity extends Fragment {
 	RadioButton money_dlg_radio_btn_in, money_dlg_radio_btn_out;
 
 	View moneyview;
+	
+	TextView money_balance;
 
 	String year="", month="", day="", allday="";
 	String valueplus="", valueminus="", valueall="", contents="";
@@ -91,7 +89,8 @@ public class MoneyActivity extends Fragment {
 		mAdapter = new PayBookAdapter(getActivity());
 		mListView.setAdapter(mAdapter);
 		conntectCheck();
-
+		
+		/*추가버튼*/
 		plus_btn.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -114,9 +113,9 @@ public class MoneyActivity extends Fragment {
 						money_dlg_edt2 = (EditText) moneyview.findViewById(R.id.money_dlg_edt2);
 
 						year = Integer.toString(money_dlg_dp.getYear());
-						month = Integer.toString(money_dlg_dp.getMonth() + 1);
-						day = Integer.toString(money_dlg_dp.getDayOfMonth());
-						allday = year + "/" + month + "/" + day;
+						month = Integer.toString(money_dlg_dp.getMonth() + 1); if(month.length() == 1) month = 0 + month;
+						day = Integer.toString(money_dlg_dp.getDayOfMonth()); if(day.length() == 1) day = 0 + day;
+						allday = year + "" + month + "" + day;
 						contents = money_dlg_edt1.getText().toString();
 
 						if (money_dlg_radio_btn_in.isChecked()) {
@@ -127,12 +126,17 @@ public class MoneyActivity extends Fragment {
 							valueminus = money_dlg_edt2.getText().toString();
 						}
 
-						int a = Integer.parseInt(sum);
-						int b = Integer.parseInt(valueplus);
-						int c = Integer.parseInt(valueminus);
-						valueallsum = a + b - c + 0;
-						valueall = Integer.toString(valueallsum);
-
+						int balance = 0;
+						if( mListView.getCount() == 0 ){
+							balance = Integer.parseInt(valueplus) - Integer.parseInt(valueminus) + 0; 
+							valueall = Integer.toString(balance);
+						}
+						else{
+							money_balance = (TextView)mListView.findViewById(R.id.money_balance);
+							balance = Integer.parseInt(money_balance.toString()) + Integer.parseInt(valueplus) - Integer.parseInt(valueminus) + 0; 
+							valueall = Integer.toString(balance);
+						}
+								
 						/*
 						 * AlertDialog.Builder alertDialogBuilder = new
 						 * AlertDialog.Builder(getActivity()); // set the title
@@ -170,12 +174,12 @@ public class MoneyActivity extends Fragment {
 
 									List<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>(2);
 									//nameValuePairs.add(new BasicNameValuePair("id", "test"));
-									nameValuePairs.add(new BasicNameValuePair("groupName", group));
-									nameValuePairs.add(new BasicNameValuePair("date", allday));
-									nameValuePairs.add(new BasicNameValuePair("plus", valueplus));
-									nameValuePairs.add(new BasicNameValuePair("minus", valueminus));
-									nameValuePairs.add(new BasicNameValuePair("balance", "1000"));
-									nameValuePairs.add(new BasicNameValuePair("content", contents));
+									nameValuePairs.add(new BasicNameValuePair("groupName", group)); Log.d(group, "group");
+									nameValuePairs.add(new BasicNameValuePair("date", allday)); Log.d(allday, "date");
+									nameValuePairs.add(new BasicNameValuePair("plus", valueplus)); Log.d(valueplus, "plus");
+									nameValuePairs.add(new BasicNameValuePair("minus", valueminus)); Log.d(valueminus, "minus");
+									nameValuePairs.add(new BasicNameValuePair("balance", valueall)); Log.d(valueall, "all");
+									nameValuePairs.add(new BasicNameValuePair("content", contents)); Log.d(contents, "contents");
 
 									httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -259,4 +263,6 @@ public class MoneyActivity extends Fragment {
 			break;
 		}
 	}
+	
+	
 }
