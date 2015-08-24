@@ -116,7 +116,12 @@ public class GroupMenuActivity extends Activity {
 				launchDeepLinkActivity(intent);
 			}
 		}
-
+		
+		//memo에 email 정보 받아오기
+		Intent i = getIntent();
+		email = i.getStringExtra("email2");
+		Log.d(email, "emailg2");
+		
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -139,8 +144,9 @@ public class GroupMenuActivity extends Activity {
 
 				Intent intent = new Intent(getApplicationContext(), TabMainActivity.class);
 				intent.putExtra("group", GroupName.getText());
-				email = intent.getStringExtra("email");
-				intent.putExtra("email", email);
+				
+				intent.putExtra("email3", email);
+				Log.d(email, "emailgroup");
 				// 위에서 만든 Bundle을 인텐트에 넣는다.
 				// intent.putExtras(extras);
 				// 액티비티를 생성한다.

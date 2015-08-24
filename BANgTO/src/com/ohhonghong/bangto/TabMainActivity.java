@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -57,8 +58,8 @@ public class TabMainActivity extends FragmentActivity implements ActionBar.TabLi
       //mTabs.add(new SamplePagerItem(getString(R.string.tab_stream),Color.BLUE,Color.GRAY));
       Intent intent = getIntent();
       group = intent.getStringExtra("group");
-      email = intent.getStringExtra("email");
-      
+      email = intent.getStringExtra("email3");
+      Log.d(email, "emailtab");
    }
 
    public class SectionsPagerAdapter extends FragmentPagerAdapter {

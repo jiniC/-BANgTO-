@@ -132,7 +132,8 @@ public class PersonalInfoActivity extends Activity {
 				thread.start();
 
 				Intent intent = new Intent(getApplicationContext(), GroupMenuActivity.class);
-				intent.putExtra("email",email);
+				intent.putExtra("email2",email);
+				Log.d(email, "emailperson");
 				startActivity(intent);
 
 			}
