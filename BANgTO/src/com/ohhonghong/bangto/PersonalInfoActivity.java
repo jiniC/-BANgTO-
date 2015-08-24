@@ -50,6 +50,13 @@ public class PersonalInfoActivity extends Activity {
 		bankspinner = (Spinner) findViewById(R.id.spinner);
 		account = (EditText) findViewById(R.id.account);
 
+		if(account!=null)
+		{
+			Intent intent = new Intent(this,GroupMenuActivity.class);
+		      startActivity(intent);
+
+		}
+		
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setDisplayShowHomeEnabled(false);
