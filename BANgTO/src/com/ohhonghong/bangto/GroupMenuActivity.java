@@ -59,7 +59,8 @@ public class GroupMenuActivity extends Activity {
 	// private GroupAdapter mAdapter = null;
 	View dlgview;
 	ImageButton groupAddButton;
-	EditText etGroupName, etMemberName;
+	EditText etGroupName;
+	TextView etMemberName;
 	private ArrayList<ListDataGroup> mListData = new ArrayList<ListDataGroup>();
 	
 	Typeface childFont;
@@ -134,6 +135,8 @@ public class GroupMenuActivity extends Activity {
 		});
 
 		mListView.setOnItemLongClickListener(new ListViewItemLongClickListener());
+		
+		//그룹 만들기 버튼을 눌렀을 때
 		groupAddButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -145,7 +148,7 @@ public class GroupMenuActivity extends Activity {
 
 				dlg.setView(dlgview);
 				etGroupName = (EditText) dlgview.findViewById(R.id.etGroupName);
-				etMemberName = (EditText) dlgview.findViewById(R.id.etMemberName);
+				etMemberName = (TextView) dlgview.findViewById(R.id.etMemberName);
 				etMemberName.setOnClickListener(new OnClickListener() {
 
 					@Override

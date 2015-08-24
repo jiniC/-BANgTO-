@@ -35,12 +35,15 @@
             android:layout_height="wrap_content"
             android:src="@drawable/groupmenu_dialog_invite" />
 
-        <EditText
+        <TextView
+            android:layout_marginTop="3dp"
             android:id="@+id/etMemberName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="사용자 이메일"
-            android:ems="10" />
+            android:text=" 초대장 보내기"
+            android:textColor="#989898"
+            android:textSize="8pt"
+             />
 
     </LinearLayout>
 
