@@ -40,7 +40,7 @@ public class MoneyActivity extends Fragment {
 	public PayBookAdapter mAdapter;
 	
 	ImageButton plus_btn;
-	ImageView money_imgv;
+	//ImageView money_imgv;
 	DatePicker money_dlg_dp;
 	EditText money_dlg_edt1, money_dlg_edt2;
 	RadioButton money_dlg_radio_btn_in, money_dlg_radio_btn_out;
@@ -67,7 +67,7 @@ public class MoneyActivity extends Fragment {
 		View view = inflater.inflate(R.layout.money, null);
 
 		plus_btn = (ImageButton) view.findViewById(R.id.plus_btn);
-		money_imgv = (ImageView) view.findViewById(R.id.money_imgv);
+		//money_imgv = (ImageView) view.findViewById(R.id.money_imgv);
 		money_dlg_dp = (DatePicker) view.findViewById(R.id.money_dlg_dp);
 		money_dlg_edt1 = (EditText) view.findViewById(R.id.money_dlg_edt1);
 		money_dlg_edt2 = (EditText) view.findViewById(R.id.money_dlg_edt2);
