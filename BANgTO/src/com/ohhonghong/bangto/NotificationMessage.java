@@ -1,4 +1,4 @@
-package com.ohhonghong.notification;
+package com.ohhonghong.bangto;
 
 import android.app.Activity;
 import android.app.NotificationManager;

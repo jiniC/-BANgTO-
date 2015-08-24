@@ -1,4 +1,4 @@
-package com.ohhonghong.notification;
+package com.ohhonghong.bangto;
 
 import com.ohhonghong.bangto.R;
 import com.ohhonghong.bangto.R.raw;
@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.widget.Toast;
 
 public class NotificationBuilder extends Activity{
@@ -23,7 +24,7 @@ public class NotificationBuilder extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      
+        Log.d("a", "hae2");
 			// Get Notification Service
 			nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 			
@@ -37,7 +38,7 @@ public class NotificationBuilder extends Activity{
 						"µ· °±±â", System.currentTimeMillis()+60);
 			
 			notification.setLatestEventInfo(NotificationBuilder.this, 
-					"µ·", "3ÀÏ ¾È¿¡ °±À¸¼¼¿ä", intent);
+					"BANgTO °øÁö", "¾ÆÁ÷ °±¾Æ¾ß ÇÒ µ·ÀÌ ÀÖ½À´Ï´Ù.", intent);
 			
 			nm.notify(1234, notification);
 			mVibe = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
