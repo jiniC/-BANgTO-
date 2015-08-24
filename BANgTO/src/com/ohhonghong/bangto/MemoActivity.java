@@ -19,13 +19,13 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
-import com.ohhonghong.adapter.MemberAdapter;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
 import com.ohhonghong.adapter.MemoAdapter;
 import com.ohhonghong.data.ListDataMemo;
-import com.ohhonghong.utility.MemberAsyncTask;
 import com.ohhonghong.utility.MemoAsyncTask;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -38,7 +38,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -52,13 +51,14 @@ public class MemoActivity extends Fragment {
 
 	SimpleDateFormat m_date_format = null;
 	SimpleDateFormat m_time_format = null;
-	String dateS,timeS;
-	
+	String dateS, timeS;
+
 	ImageButton sendbutton;
 	TextView message;
 	String memo;
 	String date;
-	
+	String userName;
+	 
 	Context mContext;
 	public String group;
 
@@ -82,21 +82,21 @@ public class MemoActivity extends Fragment {
 		sendbutton = (ImageButton) view.findViewById(R.id.sendbutton);
 		message = (TextView) view.findViewById(R.id.message);
 
+
 		sendbutton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				memo = message.getText().toString();
-				
+
 				long now = System.currentTimeMillis();// 현재 시간을 msec으로 구한다.
 				Date date = new Date(now);// 현재 시간을 저장 한다.
 				m_date_format = new SimpleDateFormat("yyyy/MM/dd", Locale.KOREA);
 				m_time_format = new SimpleDateFormat("HH:mm:ss", Locale.KOREA);
-				dateS =  m_date_format.format(date);
+				dateS = m_date_format.format(date);
 				timeS = m_time_format.format(date);
-				
-				
+
 				Thread thread = new Thread() {
 					@Override
 					public void run() {
@@ -110,7 +110,8 @@ public class MemoActivity extends Fragment {
 							httpPost.setURI(url);
 
 							List<BasicNameValuePair> nameValuePairs = new ArrayList<BasicNameValuePair>(2);
-							//nameValuePairs.add(new BasicNameValuePair("id", "test"));
+							// nameValuePairs.add(new BasicNameValuePair("id",
+							// "test"));
 							nameValuePairs.add(new BasicNameValuePair("groupName", group));
 							nameValuePairs.add(new BasicNameValuePair("who", "test"));
 							nameValuePairs.add(new BasicNameValuePair("date", dateS + " " + timeS));
@@ -137,18 +138,17 @@ public class MemoActivity extends Fragment {
 				};
 
 				thread.start();
-				
+
 				String sendmessage = message.getText().toString();
 				message.setText("");
-				
-				/*ListDataMemo data = null;
-				data = new ListDataMemo();
-				data.setUsername("test");
-				data.setMemo(sendmessage);
-				mAdapter.add(data);
-				data_list.add(data);*/
-				
-				//mListView.smoothScrollToPosition(mAdapter.getCount() - 1);
+
+				/*
+				 * ListDataMemo data = null; data = new ListDataMemo();
+				 * data.setUsername("test"); data.setMemo(sendmessage);
+				 * mAdapter.add(data); data_list.add(data);
+				 */
+
+				// mListView.smoothScrollToPosition(mAdapter.getCount() - 1);
 				mListView.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
 				mAdapter.notifyDataSetChanged();
 				conntectCheck();
