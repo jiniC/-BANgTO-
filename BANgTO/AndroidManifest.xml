@@ -5,23 +5,49 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="16"
+        android:minSdkVersion="14"
         android:targetSdkVersion="21" />
 
+	<!-- 네트워크 접속 권한 -->
+	<uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:icon="@drawable/starticon"
+        android:label="@string/app_name" 
+        android:theme="@style/CustomActionBarTheme" >
+        
+        
+        
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
+            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="GroupMenuActivity"></activity>
+        <activity android:name="BankActivity"></activity>
+        <activity android:name="PersonalInfoActivity"></activity>
+        <activity android:name="TabMainActivity"></activity>
+        <activity android:name="MoneyActivity"></activity>
+        <activity android:name="MemberActivity"></activity>
+        <activity android:name="LoadingActivity"></activity>
+        <activity android:name="MemoActivity"></activity>
+        <activity android:name="NotificationBuilder"></activity>
+        <activity android:name="NotificationMessage"></activity>     
+        
     </application>
 
 </manifest>
